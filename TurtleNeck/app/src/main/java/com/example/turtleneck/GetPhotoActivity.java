@@ -10,7 +10,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,9 +24,9 @@ public class GetPhotoActivity extends MainActivity {
     ImageView imageView;
     Button Getpht;
 
-    static final int GO_CAMERA = 1;
-    static final int GO_GALLERY = 2;
-    static final int TAKE_PHOTO = 3;
+    static final int GO_CAMERA = 1;     // 카메라로
+    static final int GO_GALLERY = 2;    // 갤러리로
+    static final int TAKE_PHOTO = 3;    // 사진 저장
 
     // 카메라로 촬영한 이미지 저장 경로
     String mCurrentPhotoPath;
@@ -106,6 +105,7 @@ public class GetPhotoActivity extends MainActivity {
             if(photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this, "com.example.turtleneck.fileprovider", photoFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                // 사진 저장으로 이동
                 startActivityForResult(intent, TAKE_PHOTO);
             }
         }
@@ -140,7 +140,6 @@ public class GetPhotoActivity extends MainActivity {
                     e.printStackTrace();
                 }
             }
-
             // 사진을 저장하는 부분
             else if(requestCode == TAKE_PHOTO) {
                 try {
