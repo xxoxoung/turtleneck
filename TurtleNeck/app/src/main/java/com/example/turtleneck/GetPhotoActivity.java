@@ -78,6 +78,45 @@ public class GetPhotoActivity extends MainActivity {
         }
     }
 
+    // 카메라 실행
+    private void dispatchTakePictureIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // 인텐트 확인
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            // 파일 만들고 초기화
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // 에러난 경우
+            }
+            // 파일이 정상적으로 만들어지면 계속
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.turtleneck.fileprovider",
+                        photoFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(intent, REQUEST_TAKE_PHOTO);
+            }
+        }
+    }
+
+    // 카메라로 촬영한 이미지를 파일로 저장
+    private File createImageFile() throws IOException {
+        // 파일 이름 만들기
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        // 파일 저장
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
+
     // 카메라로 촬영한 영상을 가져오는 부분
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -123,45 +162,6 @@ public class GetPhotoActivity extends MainActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    // 카메라 실행
-    private void dispatchTakePictureIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // 인텐트 확인
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            // 파일 만들고 초기화
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // 에러난 경우
-            }
-            // 파일이 정상적으로 만들어지면 계속
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,
-                        "com.example.turtleneck.fileprovider",
-                        photoFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(intent, REQUEST_TAKE_PHOTO);
-            }
-        }
-    }
-
-    // 카메라로 촬영한 이미지를 파일로 저장
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
     }
 
     // 사진 돌려주는 함수
