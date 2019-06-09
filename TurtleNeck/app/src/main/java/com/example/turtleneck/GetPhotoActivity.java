@@ -4,14 +4,24 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class GetPhotoActivity extends MainActivity {
@@ -19,6 +29,9 @@ public class GetPhotoActivity extends MainActivity {
     ImageView imageView;
     Button GoCam;
     final static int TAKE_PHOTO = 1;
+
+    String mCurrentPhotoPath;
+    static final int REQUEST_TAKE_PHOTO = 1;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,15 +64,15 @@ public class GetPhotoActivity extends MainActivity {
         }
     }
 
-    // 버튼 onClick리스터 처리부분
+    // 버튼 클릭 이벤트리스너 처리
     @Override
     public void onClick(View v) {
         switch(v.getId()){
-            case R.id.GoCam:
+            case R.id.GoCam: {
                 // 카메라 앱을 여는 소스
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, TAKE_PHOTO);
+                dispatchTakePictureIntent();
                 break;
+            }
         }
     }
 
@@ -67,17 +80,61 @@ public class GetPhotoActivity extends MainActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
+        try {
+            switch(requestCode) {
+                case REQUEST_TAKE_PHOTO : {
+                    if(resultCode == RESULT_OK) {
+                        File file = new File(mCurrentPhotoPath);
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.fromFile(file));
 
-        switch (requestCode) {
-            case TAKE_PHOTO:
-                if (resultCode == RESULT_OK && intent.hasExtra("data")) {
-                    Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
-                    if (bitmap != null) {
-                        imageView.setImageBitmap(bitmap);
+                        if(bitmap != null) {
+                            imageView.setImageBitmap(bitmap);
+                        }
                     }
-
+                    break;
                 }
-                break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+    }
+
+    // 카메라 실행
+    private void dispatchTakePictureIntent() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.example.turtleneck.fileprovider",
+                        photoFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                startActivityForResult(intent, REQUEST_TAKE_PHOTO);
+            }
+        }
+    }
+
+    // 카메라로 촬영한 이미지를 파일로 저장
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+        // Save a file: path for use with ACTION_VIEW intents
+        mCurrentPhotoPath = image.getAbsolutePath();
+        return image;
     }
 }

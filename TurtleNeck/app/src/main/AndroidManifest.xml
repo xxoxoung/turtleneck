@@ -23,11 +23,15 @@
             </intent-filter>
         </activity>
         <activity android:name=".GetPhotoActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.turtleneck.provider"
+            android:authorities="com.example.turtleneck.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
