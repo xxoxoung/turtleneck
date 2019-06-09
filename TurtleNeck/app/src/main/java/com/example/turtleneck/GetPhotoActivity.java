@@ -1,157 +1,83 @@
 package com.example.turtleneck;
 
-import android.content.DialogInterface;
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
-import android.support.v4.content.FileProvider;
-import android.support.v7.app.AlertDialog;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class GetPhotoActivity extends MainActivity {
+    final String TAG = getClass().getSimpleName();
     ImageView imageView;
-    Button Getpht;
-
-    static final int GO_CAMERA = 1;     // 카메라로
-    static final int GO_GALLERY = 2;    // 갤러리로
-    static final int TAKE_PHOTO = 3;    // 사진 저장
-
-    // 카메라로 촬영한 이미지 저장 경로
-    String mCurrentPhotoPath;
+    Button GoCam;
+    final static int TAKE_PHOTO = 1;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getphoto);
 
         imageView = findViewById(R.id.DiaPht);
-        Getpht = findViewById(R.id.GetPht);
+        GoCam = findViewById(R.id.GoCam);
 
-        Getpht.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // 카메라로
-                DialogInterface.OnClickListener gocam = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent1 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent1, GO_CAMERA);
-                    }
-                };
+       // 카메라로
+       GoCam.setOnClickListener(this);
 
-                // 갤러리로
-                DialogInterface.OnClickListener gogal = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent2 = new Intent();
-                        intent2.setType("image/*");
-                        intent2.setAction(Intent.ACTION_GET_CONTENT);
-                        startActivityForResult(intent2, GO_GALLERY);
-                    }
-                };
-
-                //취소
-                DialogInterface.OnClickListener can = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                };
-
-                new AlertDialog.Builder(GetPhotoActivity.this)
-                        .setTitle("사진을 골라주세요!")
-                        .setPositiveButton("카메라로", gocam)
-                        .setNeutralButton("취소", can)
-                        .setNegativeButton("갤러리로", gogal)
-                        .show();
-            }
-        });
-    }
-
-    private File createImageFile() throws IOException {
-        // 이미지 파일 이름 생성
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(imageFileName, ".jpg", storageDir);
-
-        // 파일 저장
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
-
-    // 카메라 인텐트 실행 함수
-    private void TakeCameraIntent() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if(intent.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
-
-            try {
-                photoFile = createImageFile();
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
-
-            if(photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this, "com.example.turtleneck.fileprovider", photoFile);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                // 사진 저장으로 이동
-                startActivityForResult(intent, TAKE_PHOTO);
+        // 6.0 마쉬멜로우 이상일 경우에는 권한 체크 후 권한 요청
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ) {
+                Log.d(TAG, "권한 설정 완료");
+            } else {
+                Log.d(TAG, "권한 설정 요청");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
     }
 
-    protected void onActtivityResult(int requestCode, int resultCode, Intent data) {
-        if(resultCode == RESULT_OK) {
-            // 카메라로 성공시 처리
-            if(requestCode == GO_CAMERA) {
-                /**
-                try {
-                    Bundle bundle = data.getExtras();
-                    Bitmap bitmap = (Bitmap) bundle.get("data");
-                    if(bitmap != null) {
-                        imageView.setImageBitmap(bitmap);
-                    }
-                    //imageView.setImageURI(data.getData());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } **/
-                TakeCameraIntent();
-            }
-            // 갤러리로 성공시 처리
-            else if(requestCode == GO_GALLERY) {
-                try {
-                    InputStream in = getContentResolver().openInputStream(data.getData());
-                    Bitmap img = BitmapFactory.decodeStream(in);
-                    imageView.setImageBitmap(img);
-                    in.close();
+    // 권한 요청
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        Log.d(TAG, "onRequestPermissionsResult");
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
+            Log.d(TAG, "Permission: " + permissions[0] + "was " + grantResults[0]);
+        }
+    }
 
-                } catch(Exception e) {
-                    e.printStackTrace();
-                }
-            }
-            // 사진을 저장하는 부분
-            else if(requestCode == TAKE_PHOTO) {
-                try {
-                    File file = new File(mCurrentPhotoPath);
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.fromFile(file));
-                    if(bitmap != null) {
+    // 버튼 onClick리스터 처리부분
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()){
+            case R.id.GoCam:
+                // 카메라 앱을 여는 소스
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, TAKE_PHOTO);
+                break;
+        }
+    }
+
+    // 카메라로 촬영한 영상을 가져오는 부분
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        switch (requestCode) {
+            case TAKE_PHOTO:
+                if (resultCode == RESULT_OK && intent.hasExtra("data")) {
+                    Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
+                    if (bitmap != null) {
                         imageView.setImageBitmap(bitmap);
                     }
-                } catch(Exception e) {
-                    e.printStackTrace();
+
                 }
-            }
+                break;
         }
     }
 }
