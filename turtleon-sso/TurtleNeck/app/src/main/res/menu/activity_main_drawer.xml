@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    // 네비게이션 바 항목 수정하는 부분
+    // 나중에 아이콘 수정하기!!!
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_StartDia"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="진단 시작" />
+        <item
+            android:id="@+id/nav_ConfirmDia"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="진단 확인" />
+
+        <item
+            android:id="@+id/nav_ModifyDia"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="진단 정보 수정" />
+        <item
+            android:id="@+id/nav_ModifySIgn"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="회원 정보 수정" />
+
+        <item
+            android:id="@+id/nav_Board"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="게시글 관리" />
+        <item
+            android:id="@+id/nav_Setting"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="설정" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_Send"
+                android:icon="@drawable/ic_menu_share"
+                android:title="오류보내기" />
+            <item
+                android:id="@+id/nav_FAQ"
+                android:icon="@drawable/ic_menu_send"
+                android:title="고객센터" />
+        </menu>
+    </item>
+
+</menu>
