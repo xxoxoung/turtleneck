@@ -19,11 +19,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:label="굿바이 거북"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
 
         <activity android:name=".StartActivity">
             <intent-filter>
@@ -34,14 +29,21 @@
 
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".SignActivity"></activity>
-        <activity android:name=".DiagActivity"></activity>
-        <activity android:name=".GetPhotoActivity"></activity>
-        <activity android:name=".GraphActivity">
+
+        <activity
+            android:name=".MainActivity"
+            android:label="굿바이 거북"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".DiagActivity"></activity>
+        <activity android:name=".GetPhotoActivity"></activity>
+        <activity android:name=".GraphActivity"></activity>
+
         <activity android:name=".ConfirmActivity"></activity>
 
         <provider
