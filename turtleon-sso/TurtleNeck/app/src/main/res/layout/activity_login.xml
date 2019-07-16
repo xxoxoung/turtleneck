@@ -8,43 +8,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" >
-    <TableRow>
-        <TextView
-            android:text="ID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/ID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="PW"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/PW"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </TableRow>
-    <TableRow>
-        <Button
-            android:id="@+id/LoginBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_span="4"
-            android:text="Log in"
-            />
-    </TableRow>
-    <TableRow>
-        <Button
-            android:id="@+id/GoSignBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_span="4"
-            android:text="아직 회원이 아니신가요? 회원가입"
-            />
-    </TableRow>
+        <TableRow>
+            <EditText
+                android:id="@+id/ID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:ems="10"
+                android:hint="아이디" />
+        </TableRow>
+        <TableRow>
+            <EditText
+                android:id="@+id/PW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:ems="10"
+                android:hint="비밀번호" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/LoginBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="로그인" />
+        </TableRow>
+        <TableRow>
+            <Button
+                android:id="@+id/GoSignBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="회원가입" />
+        </TableRow>
     </TableLayout>
 </RelativeLayout>
