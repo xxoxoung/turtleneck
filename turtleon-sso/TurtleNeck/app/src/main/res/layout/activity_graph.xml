@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".GraphActivity">
+
+    //진단 그래프로 교체하기!!!
+    <ImageView
+        android:id="@+id/GraphLogo"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/logo" />
+
+    // 진단번호, 진단날짜, 진단값 표
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*" >
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="#666666"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="진단 번호"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="#666666"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="진단 날짜"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="1dp"
+                android:background="#666666"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="진단값"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
