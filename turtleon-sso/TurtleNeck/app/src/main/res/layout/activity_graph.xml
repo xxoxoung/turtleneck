@@ -16,44 +16,14 @@
         android:layout_marginBottom="30dp"
         android:src="@drawable/logo" />
 
-    // 진단번호, 진단날짜, 진단값 표
-    <TableLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/GotoMainBtn"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:stretchColumns="*" >
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp" />
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:layout_marginLeft="1dp"
-                android:background="#666666"
-                android:gravity="center"
-                android:padding="3dp"
-                android:text="진단 번호"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:layout_marginLeft="1dp"
-                android:background="#666666"
-                android:gravity="center"
-                android:padding="3dp"
-                android:text="진단 날짜"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:layout_marginLeft="1dp"
-                android:background="#666666"
-                android:gravity="center"
-                android:padding="3dp"
-                android:text="진단값"/>
-        </TableRow>
-    </TableLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginBottom="50dp"
+        android:text="메인으로"
+        />
 </LinearLayout>

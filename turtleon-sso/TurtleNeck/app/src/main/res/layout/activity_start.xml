@@ -2,14 +2,12 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <TextView
         android:text="굿바이 거북"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"/>
-
     <ImageView
         android:id="@+id/StartLogo"
         android:layout_marginTop="170dp"
@@ -18,7 +16,6 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/logo"
         />
-
     <Button
         android:id="@+id/StartBtn"
         android:layout_width="wrap_content"

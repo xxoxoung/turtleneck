@@ -25,17 +25,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // 우측 하단 메일 표시
-        // 나중에 삭제 필요
-//        FloatingActionButton fab = findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,12 +44,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -70,8 +59,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         // noinspection SimplifiableIfStatement
-        // 우측 상단 점 세개 버튼
-        // 나중에 삭제 필요
         if (id == R.id.action_settings) {
             return true;
         }
@@ -89,10 +76,10 @@ public class MainActivity extends AppCompatActivity
             // 진단 시작 화면으로 이동
             Intent intent1 = new Intent(this, DiagActivity.class);
             startActivity(intent1);
-            finish();
         } else if (id == R.id.nav_ConfirmDia) {
             // 진단 확인 화면으로 이동
-
+            Intent intent2 = new Intent(this, ConfirmActivity.class);
+            startActivity(intent2);
         } else if (id == R.id.nav_ModifyDia) {
             // 진단 정보 수정 화면으로 이동
 

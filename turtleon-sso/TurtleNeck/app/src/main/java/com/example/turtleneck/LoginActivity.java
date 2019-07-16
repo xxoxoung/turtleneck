@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 // 회원가입 화면으로 이동
                 Intent intent2 = new Intent(this, SignActivity.class);
                 startActivity(intent2);
-                finish();
                 break;
             }
         }
