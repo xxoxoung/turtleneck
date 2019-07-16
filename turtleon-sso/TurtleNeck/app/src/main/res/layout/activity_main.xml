@@ -9,7 +9,7 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-    // 메인 레이아웃 부분
+    // 메인 화면 상단바 부분
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"

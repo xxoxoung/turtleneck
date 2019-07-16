@@ -14,7 +14,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
     private Button SignBtn;
     private EditText eID;
     private EditText ePW;
-    private EditText ePW2;
+   // private EditText ePW2;
     private EditText eName;
     private EditText eEmail;
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -18,13 +19,17 @@ public class DiagActivity extends AppCompatActivity implements View.OnClickListe
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
 
-    @Override
+    private EditText eTall;
+
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diag);
 
         // 진단 시작 버튼에 클릭 이벤트 연결
         findViewById(R.id.StDgBtn).setOnClickListener(this);
+
+        eTall = (EditText) findViewById(R.id.Tall);
 
         // Spinner를 위한 arrayList 정의
         // 성별
@@ -54,8 +59,14 @@ public class DiagActivity extends AppCompatActivity implements View.OnClickListe
     // 진단 시작 버튼 클릭 이벤트
     // GetPhotoActivity 호출
     public void onClick(View view) {
-        Intent intent = new Intent(this, GetPhotoActivity.class);
-        startActivity(intent);
-        finish();
+        String Tall = eTall.getText().toString().trim();
+
+        if(!Tall.isEmpty()) {
+            Intent intent = new Intent(this, GetPhotoActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(getApplicationContext(),"키를 입력해주세요!", Toast.LENGTH_LONG).show();
+        }
     }
 }
