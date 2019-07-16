@@ -2,18 +2,14 @@ package com.example.turtleneck;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -82,10 +78,12 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent2);
         } else if (id == R.id.nav_ModifyDia) {
             // 진단 정보 수정 화면으로 이동
-
-        } else if (id == R.id.nav_ModifySIgn) {
+            Intent intent3 = new Intent(this, ModifyDiagActivity.class);
+            startActivity(intent3);
+        } else if (id == R.id.nav_ModifySign) {
             // 회원 정보 수정 화면으로 이동
-
+            Intent intent4 = new Intent(this, ModifySignActivity.class);
+            startActivity(intent4);
         } else if (id == R.id.nav_Board) {
             // 게시글 관리 화면으로 이동
 
