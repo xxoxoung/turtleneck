@@ -23,7 +23,7 @@
         </TableRow>
         <TableRow>
             <EditText
-                android:id="@+id/PW1"
+                android:id="@+id/PW"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -34,19 +34,21 @@
                 android:ems="10"
                 android:hint="비밀번호" />
         </TableRow>
-        <TableRow>
-            <EditText
-                android:id="@+id/PW2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:ems="10"
-                android:hint="비밀번호 확인"/>
-        </TableRow>
+        <!--비밀번호 확인은 나중에 기능 추가 고려!-->
+        <!--지금은 넘나 복잡함-->
+        <!--<TableRow>-->
+            <!--<EditText-->
+                <!--android:id="@+id/PW2"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentEnd="true"-->
+                <!--android:layout_alignParentLeft="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:ems="10"-->
+                <!--android:hint="비밀번호 확인"/>-->
+        <!--</TableRow>-->
         <TableRow>
             <EditText
                 android:id="@+id/Name"

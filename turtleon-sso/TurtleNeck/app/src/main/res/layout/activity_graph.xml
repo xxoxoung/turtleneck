@@ -1,29 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".GraphActivity">
+
+    // 임시 문구
+    // 나중에 디비에서 결과값 보여주기
+    <TextView
+        android:text="당신의 진단 결과는?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        android:id="@+id/ggg"/>
 
     //진단 그래프로 교체하기!!!
     <ImageView
         android:id="@+id/GraphLogo"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/logo" />
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo"
+        android:layout_below="@id/ggg"/>
 
+    // 진단 저장하고 메인으로 가는 버튼
+    // 나중에 수정하기,,,,!!!
+    <!--<Button-->
+        <!--android:id="@+id/SaveDiagBtn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:text="진단 저장"-->
+        <!--android:layout_below="@id/GraphLogo"-->
+        <!--/>-->
+    <!---->
+
+    // 진단 저장 안하고 그냥 메인으로 가는 버튼
     <Button
         android:id="@+id/GotoMainBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:layout_marginBottom="50dp"
         android:text="메인으로"
+        android:layout_below="@id/GraphLogo"
         />
-</LinearLayout>
+</RelativeLayout>

@@ -39,7 +39,8 @@ public class DiagActivity extends AppCompatActivity implements View.OnClickListe
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                // 나중에 키 정보와 합쳐서 디비로 전송 추가
+                // 나중에 키 정보와 합쳐서 디비로 전송 추가 고려
+                // 진단 시작할 때 정보 전송해야 함!
                 Toast.makeText(getApplicationContext(), arrayList.get(position) + "가 선택되었습니다.",Toast.LENGTH_SHORT).show();
             }
 
