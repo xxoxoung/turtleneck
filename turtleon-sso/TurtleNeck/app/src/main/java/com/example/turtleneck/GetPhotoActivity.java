@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 import java.lang.String;
 
 import java.io.File;
@@ -109,8 +108,6 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-
-
     // 카메라 실행
     private void dispatchTakePictureIntent() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -150,9 +147,6 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
     }
-
-
-
 
     // 카메라로 촬영한 영상을 가져오는 부분
     @Override
@@ -207,7 +201,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
-
+    
     //이미지 서버로 전송하는 함수
     public void uploadImage() {
         //절대 경로 가져오기..왜안대 시벌!
@@ -226,7 +220,6 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         MultipartBody.Part multiPartBody = MultipartBody.Part
                 .createFormData("model_pic", imageFile.getName(), requestBody);
 
-
         Call<RequestBody> call = postApi.uploadFile(multiPartBody);
 
         call.enqueue(new Callback<RequestBody>() {
@@ -241,6 +234,5 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
                 Log.d("fail", "fail");
             }
         });
-
     }
 }
