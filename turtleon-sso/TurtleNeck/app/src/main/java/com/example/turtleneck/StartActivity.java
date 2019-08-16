@@ -11,7 +11,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
         findViewById(R.id.StartBtn).setOnClickListener(this);
     }
 
