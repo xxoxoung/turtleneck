@@ -37,7 +37,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
         // 네트워크 빌드
         ApplicationController application = new ApplicationController();
         application.getInstance();
-        application.buildNetworkService("517b529f.ngrok.io",3306);
+        application.buildNetworkService("0a503014.ngrok.io",8000);
         networkService = application.getNetworkService();
     }
 
@@ -64,16 +64,16 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                     // @@@@@@@@@@@@@@@여기 수정중!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
                     // 값 연결
-                    Signup sss = new Signup();
-                    sss.setS_ID(ID);
-                    sss.setPW(PW);
-                    sss.setName(Name);
-                    sss.setEmail(Email);
+                    Signup signup = new Signup();
+                    signup.setS_ID(ID);
+                    signup.setPW(PW);
+                    signup.setName(Name);
+                    signup.setEmail(Email);
 
-                    Toast.makeText(getApplicationContext(),"함수 호출중!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"함중!", Toast.LENGTH_SHORT).show();
 
                     // POST 함수
-                    Call<Signup> postCall = networkService.post_signup(sss);
+                    Call<Signup> postCall = networkService.post_signup(signup);
 
                     postCall.enqueue(new Callback<Signup>() {
                         @Override
@@ -81,13 +81,20 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                             if(response.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(),"POST 성공!", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(getApplicationContext(),"POST 실패!", Toast.LENGTH_SHORT).show();
+                                int StatusCode = response.code();
+                                try {
+                                    Log.i(ApplicationController.TAG, "Status Code : " + StatusCode + " Error Message : " + response.errorBody().string());
+                                    Toast.makeText(getApplicationContext(),"POST 실패!", Toast.LENGTH_SHORT).show();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Signup> call, Throwable t) {
-                            Toast.makeText(getApplicationContext(),"함수 호출 실패!", Toast.LENGTH_SHORT).show();
+                            Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
+                            Toast.makeText(getApplicationContext(),"함실!", Toast.LENGTH_SHORT).show();
                         }
                     });
 

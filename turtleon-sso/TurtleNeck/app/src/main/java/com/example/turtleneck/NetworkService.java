@@ -16,8 +16,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface NetworkService {
-
     // SignActivity 회원가입 Signup
     @POST("/sign/up")
-    Call<Signup> post_signup(@Body Signup sss);
+    Call<Signup> post_signup(@Body Signup signup);
 }
