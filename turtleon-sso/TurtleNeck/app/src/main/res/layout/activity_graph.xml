@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:textSize="24dp"
         android:textStyle="bold"
         android:id="@+id/ggg"/>
@@ -28,7 +28,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/logo"
+        android:src="@drawable/graph"
         android:layout_below="@id/ggg"/>
 
     // 진단 저장하고 메인으로 가는 버튼

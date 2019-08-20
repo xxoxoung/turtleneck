@@ -32,6 +32,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:ems="10"
+                android:inputType="textPassword"
                 android:hint="비밀번호" />
         </TableRow>
         <TableRow>

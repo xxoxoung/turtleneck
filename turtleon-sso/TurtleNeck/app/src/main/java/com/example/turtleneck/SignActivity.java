@@ -110,3 +110,22 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 }
+
+// 나중에 추가
+//    // 이메일 형식 확인
+//    private boolean isValidEmail(String email) {
+//        String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+//                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+//
+//        Pattern pattern = Pattern.compile(EMAIL_PATTERN);
+//        Matcher matcher = pattern.matcher(email);
+//        return matcher.matches();
+//    }
+//
+//    // 패스워드 확인
+//    private boolean isValidPassword(String pass) {
+//        if (pass != null && pass.length() >= MIN_PASSWORD) {
+//            return true;
+//        }
+//        return false;
+//    }
