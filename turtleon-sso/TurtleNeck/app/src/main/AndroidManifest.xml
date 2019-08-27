@@ -38,6 +38,7 @@
 
         <activity android:name=".DiagActivity"></activity>
         <activity android:name=".GetPhotoActivity"></activity>
+        <activity android:name=".HelpPhotoActivity"></activity>
         <activity android:name=".GraphActivity"></activity>
 
         <activity android:name=".ConfirmActivity"></activity>

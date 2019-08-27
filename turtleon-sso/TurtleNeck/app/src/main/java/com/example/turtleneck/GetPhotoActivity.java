@@ -43,6 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GetPhotoActivity extends AppCompatActivity implements View.OnClickListener {
     final String TAG = getClass().getSimpleName();
     ImageView imageView;
+    ImageView HelpImg;
     Button GoCam;
     Button GoServer;
     final static int TAKE_PHOTO = 1;
@@ -55,14 +56,14 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getphoto);
 
-        imageView = findViewById(R.id.DiaPht);//이미지뷰
-        GoCam = findViewById(R.id.GoCam);//카메라
-        GoServer=findViewById(R.id.GoServer);//서버로 전송
+        imageView = findViewById(R.id.DiaPht);  // 이미지뷰
+        GoCam = findViewById(R.id.GoCam);       // 카메라
+        GoServer = findViewById(R.id.GoServer); // 서버로 전송
+        HelpImg = findViewById(R.id.HelpImg);   // 도움말
 
-        //서버로
-        GoServer.setOnClickListener(this);
-        // 카메라로
-        GoCam.setOnClickListener(this);
+        GoServer.setOnClickListener(this);      // 서버로
+        GoCam.setOnClickListener(this);         // 카메라로
+        HelpImg.setOnClickListener(this);       // 도움말 아이콘
 
         // 6.0 마쉬멜로우 이상일 경우에는 권한 체크 후 권한 요청
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -73,7 +74,6 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
-
     }
 
     // 권한 요청
@@ -95,6 +95,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
                 dispatchTakePictureIntent();
                 break;
             }
+
             case R.id.GoServer:{
                 //서버로 보내는 함수호출!!!!!!
                 uploadImage();
@@ -102,6 +103,14 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
                 // 이미지 서버로 전송 후 메인화면으로 화면 넘기기
                 Intent intent1 = new Intent(this, MainActivity.class);
                 startActivity(intent1);
+                finish();
+                break;
+            }
+
+            // 도움말 페이지 열기
+            case R.id.HelpImg:{
+                Intent intent2 = new Intent(this, HelpPhotoActivity.class);
+                startActivity(intent2);
                 finish();
                 break;
             }
