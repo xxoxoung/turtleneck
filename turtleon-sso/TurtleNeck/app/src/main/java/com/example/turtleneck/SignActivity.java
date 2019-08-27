@@ -37,7 +37,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
         // 네트워크 빌드
         ApplicationController application = new ApplicationController();
         application.getInstance();
-        application.buildNetworkService("0a503014.ngrok.io",8000);
+        application.buildNetworkService();
         networkService = application.getNetworkService();
     }
 
@@ -93,7 +93,8 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
 
                         @Override
                         public void onFailure(Call<Signup> call, Throwable t) {
-                            Log.i(ApplicationController.TAG, "Fail Message : " + t.getMessage());
+                            Log.i(ApplicationController.TAG, "실패 메시지 : " + t.getMessage());
+                            Log.i(ApplicationController.TAG, "요청 메시지 : " + call.request());
                             Toast.makeText(getApplicationContext(),"함실!", Toast.LENGTH_SHORT).show();
                         }
                     });

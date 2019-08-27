@@ -31,16 +31,16 @@ public class HelpPhotoActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()) {
+        switch (v.getId()) {
 
             // 다음 버튼 눌렀을 때
-            case R.id.NextBtn : {
+            case R.id.NextBtn: {
                 next++;
 
-                if(next == 2) {
+                if (next == 2) {
                     example.setImageResource(R.drawable.example2);
                     break;
-                } else if(next == 3){
+                } else if (next == 3) {
                     example.setImageResource(R.drawable.example3);
                     break;
                 } else {
@@ -49,7 +49,7 @@ public class HelpPhotoActivity extends AppCompatActivity implements View.OnClick
             }
 
             // 닫기 버튼 눌렀을 때
-            case R.id.ShutBtn : {
+            case R.id.ShutBtn: {
                 Intent intent1 = new Intent(this, GetPhotoActivity.class);
                 startActivity(intent1);
                 finish();
@@ -58,20 +58,4 @@ public class HelpPhotoActivity extends AppCompatActivity implements View.OnClick
 
         }
     }
-//    public void NextClick(View view) {
-//        next++;
-//
-//
-//
-//        if(next == 2) {
-//            exImg.setImageResource(R.drawable.example2);
-//        } else {
-//            exImg.setImageResource(R.drawable.example3);
-//        }
-//    }
-//
-//    // 닫기 버튼 눌렀을 때
-//    public void ShutClick(View view) {
-//        finish();
-//    }
 }

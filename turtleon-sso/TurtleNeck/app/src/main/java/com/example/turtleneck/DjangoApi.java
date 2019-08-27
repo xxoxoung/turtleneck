@@ -9,7 +9,7 @@ import retrofit2.http.Part;
 
 public interface DjangoApi {
 
-    String DJANGO_SITE = " http://0a503014.ngrok.io/image/";
+    String DJANGO_SITE = " http://ff51d080.ngrok.io/image/";
     //내 authtoken 주소/ngrok 끄면 다시 켜서 주소 바꿔줘야함..
 
     @Multipart
