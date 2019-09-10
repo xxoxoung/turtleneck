@@ -48,6 +48,9 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     Button GoServer;
     final static int TAKE_PHOTO = 1;
 
+    public double height;                             // 사진 세로 크기
+    public double width;                              // 사진 가로 크기
+
     String mCurrentPhotoPath;
 
     static final int REQUEST_TAKE_PHOTO = 1;
@@ -194,6 +197,12 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
 
                             // 이미지뷰에 사진 띄우기
                             imageView.setImageBitmap(rotatedBitmap);
+
+                            // 진단에 사용할 좌표값
+                            height = rotatedBitmap.getHeight();
+                            width = rotatedBitmap.getWidth();
+                            height = ((height*2)/3)/(4.2);
+                            width = ((width*2)/3)/(4.2);
                         }
                     }
                     break;
@@ -235,9 +244,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
                 Log.d("good", "good");
-
             }
-
             @Override
             public void onFailure(Call<RequestBody> call, Throwable t) {
                 Log.d("fail", "fail");

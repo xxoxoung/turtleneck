@@ -1,3 +1,5 @@
+// 지금은 안쓰는 파일
+
 package com.example.turtleneck;
 
 import android.app.Application;
@@ -54,7 +56,7 @@ public class ApplicationController extends Application{
     }
 
     public void buildNetworkService(){
-        String ip = "ff51d080.ngrok.io";
+        String ip = "a50c3941.ngrok.io";
         int port =8000;
 
         synchronized (ApplicationController.class){
