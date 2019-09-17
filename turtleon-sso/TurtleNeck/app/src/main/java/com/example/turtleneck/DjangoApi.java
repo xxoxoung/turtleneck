@@ -13,7 +13,7 @@ public interface DjangoApi {
     String DJANGO_SITE = "http://e49150c1.ngrok.io/";
     //내 authtoken 주소/ngrok 끄면 다시 켜서 주소 바꿔줘야함..
 
-    // GetPhotoActivity uploadImage()
+    // GetPhotoActivity uploadImage() 사진+좌표 전송
     @Multipart
     @POST("image/upload/")
     Call<RequestBody> uploadFile(
@@ -21,11 +21,20 @@ public interface DjangoApi {
             @Part("point_x") RequestBody point_x,
             @Part("point_y") RequestBody point_y);
 
-//    // GetPhotoActivity 좌표전송 Point
-//    @POST("image/upload/")
-//    Call<Point> post_point(@Body Point point);
-
-    // SignActivity 회원가입 Signup
+    // SignActivity 회원가입
+    @Multipart
     @POST("rest-auth/registration/")
-    Call<Signup> post_signup(@Body Signup signup);
+    Call<RequestBody> post_signup(
+            @Part("username") RequestBody username,
+            @Part("emailadress") RequestBody emailadress,
+            @Part("password1") RequestBody password1,
+            @Part("password2") RequestBody password2);
+
+    // LoginActivity 로그인 정보 전송
+    @Multipart
+    @POST("rest-auth/login/")
+    Call<RequestBody> post_login(
+            @Part("username") RequestBody username,
+            @Part("password") RequestBody password,
+            @Part("email") RequestBody emailadress);
 }

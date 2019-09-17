@@ -13,6 +13,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -78,22 +81,15 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
 
                 // 회원가입 정보 String으로 가져오기
                 // String ID = eID.getText().toString().trim();
-                String PW1 = ePW1.getText().toString().trim();
-                String PW2 = ePW2.getText().toString().trim();
-                String Name = eName.getText().toString().trim();
-                String Email = eEmail.getText().toString().trim();
+                final String username = eName.getText().toString().trim();
+                final String password1 = ePW1.getText().toString().trim();
+                final String password2 = ePW2.getText().toString().trim();
+                final String emailadress = eEmail.getText().toString().trim();
 
-                if (isValidEmail(Email)) {
-                    if (isValidPassword(PW1, PW2)) {
-                        if (!Email.isEmpty() && !PW1.isEmpty() && !Name.isEmpty() && !PW2.isEmpty()) {
+                if (isValidEmail(emailadress)) {
+                    if (isValidPassword(password1, password2)) {
+                        if (!emailadress.isEmpty() && !password1.isEmpty() && !username.isEmpty() && !password2.isEmpty()) {
                             // 디비로 회원가입 정보 전송
-                            // @@@@@@@@@@@@@@@여기 수정중!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-//                    // 네트워크 빌드 (위치 변경해서 해보기)
-//                    ApplicationController application = new ApplicationController();
-//                    application.getInstance();
-//                    application.buildNetworkService();
-//                    networkService = application.getNetworkService();
 
                             // 네트워크 빌드
                             Retrofit retrofit = new Retrofit.Builder()
@@ -103,33 +99,21 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
 
                             DjangoApi postApi = retrofit.create(DjangoApi.class);
 
-                            // 값 연결
-                            Signup signup = new Signup();
-                            // signup.setS_ID(ID);
-                            signup.setPW1(PW1);
-                            signup.setPW2(PW2);
-                            signup.setName(Name);
-                            signup.setEmail(Email);
+                            RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
+                            RequestBody requestpassword1 = RequestBody.create(MediaType.parse("multipart/data"), password1);
+                            RequestBody requestpassword2 = RequestBody.create(MediaType.parse("multipart/data"), password2);
+                            RequestBody requestemail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
 
-                            // POST 함수
-                            Call<Signup> postCall = postApi.post_signup(signup);
+                            Call<RequestBody> call = postApi.post_signup(requestUsername,requestemail,requestpassword1,requestpassword2);
 
-                            postCall.enqueue(new Callback<Signup>() {
+                            call.enqueue(new Callback<RequestBody>() {
                                 @Override
-                                public void onResponse(Call<Signup> call, Response<Signup> response) {
-                                    if (response.isSuccessful()) {
-                                    } else {
-                                        int StatusCode = response.code();
-                                        try {
-                                            Log.i("GGG", "Status Code : " + StatusCode + " Error Message : " + response.errorBody().string());
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
+                                public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
+
                                 }
 
                                 @Override
-                                public void onFailure(Call<Signup> call, Throwable t) {
+                                public void onFailure(Call<RequestBody> call, Throwable t) {
                                     Log.i("GGG", "실패 메시지 : " + t.getMessage());
                                     Log.i("GGG", "요청 메시지 : " + call.request());
                                 }
