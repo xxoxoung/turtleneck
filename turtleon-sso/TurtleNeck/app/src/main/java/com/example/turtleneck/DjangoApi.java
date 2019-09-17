@@ -17,14 +17,15 @@ public interface DjangoApi {
     @Multipart
     @POST("image/upload/")
     Call<RequestBody> uploadFile(
-            @Part MultipartBody.Part file);
+            @Part MultipartBody.Part file,
+            @Part("point_x") RequestBody point_x,
+            @Part("point_y") RequestBody point_y);
+
+//    // GetPhotoActivity 좌표전송 Point
+//    @POST("image/upload/")
+//    Call<Point> post_point(@Body Point point);
 
     // SignActivity 회원가입 Signup
     @POST("rest-auth/registration/")
     Call<Signup> post_signup(@Body Signup signup);
-
-    // GetPhotoActivity 좌표전송 Point
-    @POST("image/upload/")
-    Call<Point> post_point(@Body Point point);
-
 }

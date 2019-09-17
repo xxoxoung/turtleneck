@@ -222,10 +222,14 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     
     //이미지 서버로 전송하는 함수
     public void uploadImage() {
-        //절대 경로 가져오기..왜안대 시벌!
+        // 절대 경로 가져오기..왜안대 시벌!
 
-        //String image_path = getRealPathFromURI(uri);
+        // String image_path = getRealPathFromURI(uri);
         File imageFile = new File(mCurrentPhotoPath);
+
+        // 좌표값 String으로 변환
+        String point_x = Double.toString(width);
+        String point_y = Double.toString(height);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(DjangoApi.DJANGO_SITE)
@@ -234,40 +238,62 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
 
         DjangoApi postApi = retrofit.create(DjangoApi.class);
 
-        // 사진 전송을 위한 처리
-        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/data"), imageFile);
-        MultipartBody.Part multiPartBody = MultipartBody.Part
-                .createFormData("model_pic", imageFile.getName(), requestBody);
+        RequestBody requestImage = RequestBody.create(MediaType.parse("multipart/data"), imageFile);
+        RequestBody requestPointX = RequestBody.create(MediaType.parse("multipart/data"), point_x);
+        RequestBody requestPointY = RequestBody.create(MediaType.parse("multipart/data"), point_y);
 
-        Call<RequestBody> call = postApi.uploadFile(multiPartBody);
+        MultipartBody.Part multiPartBody = MultipartBody.Part.createFormData("model_pic", imageFile.getName(), requestImage);
+
+        Call<RequestBody> call = postApi.uploadFile(multiPartBody,requestPointX,requestPointY);
 
         call.enqueue(new Callback<RequestBody>() {
             @Override
             public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
                 Log.d("사진 전송 good", "good");
+                Log.d("좌표전송 성공",""+height+width);
             }
+
             @Override
             public void onFailure(Call<RequestBody> call, Throwable t) {
                 Log.d("사진 전송 fail", "fail");
-            }
-        });
-
-        // 좌표값 전송을 위한 처리
-        Point point = new Point();
-        point.setX(width);
-        point.setY(height);
-
-        Call<Point> postcall = postApi.post_point(point);
-
-        postcall.enqueue(new Callback<Point>() {
-            @Override
-            public void onResponse(Call<Point> call, Response<Point> response) {
-                Log.d("좌표전송 성공",""+height+width);
-            }
-            @Override
-            public void onFailure(Call<Point> call, Throwable t) {
                 Log.d("좌표전송 실패", "fail"+height+width);
             }
         });
+
+//        // 사진 전송을 위한 처리
+//        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/data"), imageFile);
+//        MultipartBody.Part multiPartBody = MultipartBody.Part
+//                .createFormData("model_pic", imageFile.getName(), requestBody);
+//
+//        Call<RequestBody> call = postApi.uploadFile(multiPartBody);
+//
+//        call.enqueue(new Callback<RequestBody>() {
+//            @Override
+//            public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
+//                Log.d("사진 전송 good", "good");
+//            }
+//            @Override
+//            public void onFailure(Call<RequestBody> call, Throwable t) {
+//                Log.d("사진 전송 fail", "fail");
+//            }
+//        });
+//
+//        // 좌표값 전송을 위한 처리
+//        Point point = new Point();
+//        point.setX(width);
+//        point.setY(height);
+//
+//        Call<Point> postcall = postApi.post_point(point);
+//
+//        postcall.enqueue(new Callback<Point>() {
+//            @Override
+//            public void onResponse(Call<Point> call, Response<Point> response) {
+//                Log.d("좌표전송 성공",""+height+width);
+//            }
+//            @Override
+//            public void onFailure(Call<Point> call, Throwable t) {
+//                Log.d("좌표전송 실패", "fail"+height+width);
+//            }
+//        });
     }
 }
