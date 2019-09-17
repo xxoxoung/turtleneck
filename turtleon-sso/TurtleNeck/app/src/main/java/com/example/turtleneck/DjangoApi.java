@@ -10,7 +10,7 @@ import retrofit2.http.Part;
 
 public interface DjangoApi {
 
-    String DJANGO_SITE = "http://fa7c21dd.ngrok.io/";
+    String DJANGO_SITE = "http://e49150c1.ngrok.io/";
     //내 authtoken 주소/ngrok 끄면 다시 켜서 주소 바꿔줘야함..
 
     // GetPhotoActivity uploadImage()
@@ -22,5 +22,9 @@ public interface DjangoApi {
     // SignActivity 회원가입 Signup
     @POST("rest-auth/registration/")
     Call<Signup> post_signup(@Body Signup signup);
+
+    // GetPhotoActivity 좌표전송 Point
+    @POST("image/upload/")
+    Call<Point> post_point(@Body Point point);
 
 }

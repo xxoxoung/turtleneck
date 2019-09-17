@@ -6,11 +6,11 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="350dp"
+        android:layout_height="400dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/example1"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="35dp"
         android:id="@+id/example"/>
 
     <LinearLayout
@@ -19,6 +19,15 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="50dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/example"
+            android:id="@+id/PrevBtn"
+            android:text="이전"
+            />
 
         <Button
             android:layout_width="wrap_content"

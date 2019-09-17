@@ -118,12 +118,10 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                                 @Override
                                 public void onResponse(Call<Signup> call, Response<Signup> response) {
                                     if (response.isSuccessful()) {
-                                        Toast.makeText(getApplicationContext(), "POST 성공!", Toast.LENGTH_SHORT).show();
                                     } else {
                                         int StatusCode = response.code();
                                         try {
                                             Log.i("GGG", "Status Code : " + StatusCode + " Error Message : " + response.errorBody().string());
-                                            Toast.makeText(getApplicationContext(), "POST 실패!", Toast.LENGTH_SHORT).show();
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
@@ -137,12 +135,10 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                             });
 
-                            // 서버 전송 성공하면 주석 처리 풀기!!!
-                            // 로그인 화면으로 이동
-                            //Intent intent1 = new Intent(this, LoginActivity.class);
-                            //startActivity(intent1);
-                            //finish();
-                            //break;
+                            Intent intent1 = new Intent(this, LoginActivity.class);
+                            startActivity(intent1);
+                            finish();
+                            break;
                         } else {
                             Toast.makeText(getApplicationContext(), "필수 사항을 입력해주세요!", Toast.LENGTH_SHORT).show();
                         }

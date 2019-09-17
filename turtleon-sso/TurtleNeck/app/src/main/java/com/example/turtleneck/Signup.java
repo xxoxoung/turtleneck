@@ -1,5 +1,6 @@
 package com.example.turtleneck;
 
+// 회원가입을 위한 클래스
 public class Signup {
     //public String S_ID;
     public String username;

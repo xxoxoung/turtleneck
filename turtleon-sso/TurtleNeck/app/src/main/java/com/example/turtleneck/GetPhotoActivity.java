@@ -234,6 +234,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
 
         DjangoApi postApi = retrofit.create(DjangoApi.class);
 
+        // 사진 전송을 위한 처리
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/data"), imageFile);
         MultipartBody.Part multiPartBody = MultipartBody.Part
                 .createFormData("model_pic", imageFile.getName(), requestBody);
@@ -243,11 +244,29 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         call.enqueue(new Callback<RequestBody>() {
             @Override
             public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
-                Log.d("good", "good");
+                Log.d("사진 전송 good", "good");
             }
             @Override
             public void onFailure(Call<RequestBody> call, Throwable t) {
-                Log.d("fail", "fail");
+                Log.d("사진 전송 fail", "fail");
+            }
+        });
+
+        // 좌표값 전송을 위한 처리
+        Point point = new Point();
+        point.setX(width);
+        point.setY(height);
+
+        Call<Point> postcall = postApi.post_point(point);
+
+        postcall.enqueue(new Callback<Point>() {
+            @Override
+            public void onResponse(Call<Point> call, Response<Point> response) {
+                Log.d("좌표전송 성공",""+height+width);
+            }
+            @Override
+            public void onFailure(Call<Point> call, Throwable t) {
+                Log.d("좌표전송 실패", "fail"+height+width);
             }
         });
     }
