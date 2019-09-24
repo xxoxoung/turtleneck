@@ -42,7 +42,6 @@
         <activity android:name=".GraphActivity"></activity>
 
         <activity android:name=".ConfirmActivity"></activity>
-        <activity android:name=".ModifyDiagActivity"></activity>
         <activity android:name=".ModifySignActivity"></activity>
 
         <provider

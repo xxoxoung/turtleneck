@@ -12,6 +12,7 @@ import android.widget.Toast;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,21 +73,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         DjangoApi postApi = retrofit.create(DjangoApi.class);
 
+                        // 값 정리
                         RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
-                        RequestBody requestpassword = RequestBody.create(MediaType.parse("multipart/data"), password);
-                        RequestBody requestemail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
+                        RequestBody requestPassword = RequestBody.create(MediaType.parse("multipart/data"), password);
+                        RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
 
-                        Call<RequestBody> call = postApi.post_login(requestUsername,requestpassword,requestemail);
+                        Call<ResponseBody> call = postApi.post_login(requestUsername,requestPassword,requestEmail);
 
-                        call.enqueue(new Callback<RequestBody>() {
+                        call.enqueue(new Callback<ResponseBody>() {
                             @Override
-                            public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
-                                Log.d("로그인 정보 전송 성공",""+username+password);
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                Log.d("로그인 정보 전송 성공",""+username+"/"+password);
                             }
 
                             @Override
-                            public void onFailure(Call<RequestBody> call, Throwable t) {
-                                Log.d("로그인 정보 전송 실패",""+username+password);
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.d("로그인 정보 전송 실패",""+username+"/"+password);
+                                Toast.makeText(getApplicationContext(),"아이디와 비밀 번호를 확인해주세요!", Toast.LENGTH_LONG).show();
                             }
                         });
 

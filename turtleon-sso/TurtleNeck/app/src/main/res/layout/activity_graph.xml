@@ -23,12 +23,12 @@
     //진단 그래프로 교체하기!!!
     <ImageView
         android:id="@+id/GraphLogo"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/graph"
+        android:src="@drawable/helpicon"
         android:layout_below="@id/ggg"/>
 
     // 진단 저장하고 메인으로 가는 버튼

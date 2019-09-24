@@ -3,6 +3,7 @@ package com.example.turtleneck;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,14 +13,27 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 // 진단 정보 입력 화면
 public class DiagActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Spinner spinner;
+    public Spinner spinner;
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
 
-    private EditText eTall;
+    public EditText eTall;
+    public String Gender;
+
+    public String tall;
+    public String gender;
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +58,7 @@ public class DiagActivity extends AppCompatActivity implements View.OnClickListe
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
-                // 나중에 키 정보와 합쳐서 디비로 전송 추가 고려
-                // 진단 시작할 때 정보 전송해야 함!
+                Gender = arrayList.get(position);
                 Toast.makeText(getApplicationContext(), arrayList.get(position) + "가 선택되었습니다.",Toast.LENGTH_SHORT).show();
             }
 
@@ -59,14 +72,46 @@ public class DiagActivity extends AppCompatActivity implements View.OnClickListe
     // 진단 시작 버튼 클릭 이벤트
     // GetPhotoActivity 호출
     public void onClick(View view) {
-        String Tall = eTall.getText().toString().trim();
+        tall = eTall.getText().toString().trim();
+        gender = Gender;
 
-        if(!Tall.isEmpty()) {
+        if(!tall.isEmpty()) {
             Intent intent = new Intent(this, GetPhotoActivity.class);
+            // tall, gender 정보 전송
+            intent.putExtra("tall",tall);
+            intent.putExtra("gender",gender);
             startActivity(intent);
             finish();
         } else {
             Toast.makeText(getApplicationContext(),"키를 입력해주세요!", Toast.LENGTH_LONG).show();
         }
+//
+//        // 네트워크 빌드
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(DjangoApi.DJANGO_SITE)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        DjangoApi postApi = retrofit.create(DjangoApi.class);
+//
+//        // 값 정리
+//        RequestBody requestTall = RequestBody.create(MediaType.parse("multipart/data"), tall);
+//        RequestBody requestGender = RequestBody.create(MediaType.parse("multipart/data"), gender);
+//
+//        Call<ResponseBody> call = postApi.post_diag(requestTall,requestGender);
+//
+//        call.enqueue(new Callback<ResponseBody>() {
+//            @Override
+//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                Log.d("진단 정보 전송 성공",""+tall+"/"+gender);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                Log.d("진단 정보 전송 실패",""+tall+"/"+gender);
+//                Log.i("GGG", "실패 메시지 : " + t.getMessage());
+//                Log.i("GGG", "요청 메시지 : " + call.request());
+//            }
+//        });
     }
 }

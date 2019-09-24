@@ -55,9 +55,18 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
 
     static final int REQUEST_TAKE_PHOTO = 1;
 
+    public String tall;
+    public String gender;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_getphoto);
+
+        // DiagActivity 에서 tall, gender 받아오기
+        Intent intent = getIntent();
+        tall = intent.getStringExtra("tall");
+        gender = intent. getStringExtra("gender");
+
 
         imageView = findViewById(R.id.DiaPht);  // 이미지뷰
         GoCam = findViewById(R.id.GoCam);       // 카메라
@@ -70,10 +79,8 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
 
         // 6.0 마쉬멜로우 이상일 경우에는 권한 체크 후 권한 요청
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ) {
-                Log.d(TAG, "권한 설정 완료");
-            } else {
-                Log.d(TAG, "권한 설정 요청");
+            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED )
+            { } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
@@ -83,10 +90,8 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.d(TAG, "onRequestPermissionsResult");
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) {
-            Log.d(TAG, "Permission: " + permissions[0] + "was " + grantResults[0]);
-        }
+
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) { }
     }
 
     // 버튼 클릭 이벤트리스너 처리
@@ -100,11 +105,11 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
             }
 
             case R.id.GoServer:{
-                //서버로 보내는 함수호출!!!!!!
+                //서버로 보내는 함수 호출
                 uploadImage();
 
                 // 이미지 서버로 전송 후 메인화면으로 화면 넘기기
-                Intent intent1 = new Intent(this, MainActivity.class);
+                Intent intent1 = new Intent(this, GraphActivity.class);
                 startActivity(intent1);
                 finish();
                 break;
@@ -222,9 +227,6 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     
     //이미지 서버로 전송하는 함수
     public void uploadImage() {
-        // 절대 경로 가져오기..왜안대 시벌!
-
-        // String image_path = getRealPathFromURI(uri);
         File imageFile = new File(mCurrentPhotoPath);
 
         // 좌표값 String으로 변환
@@ -243,21 +245,26 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         RequestBody requestPointY = RequestBody.create(MediaType.parse("multipart/data"), point_y);
         //RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data", username);
 
+        RequestBody requestTall = RequestBody.create(MediaType.parse("multipart/data"), tall);
+        RequestBody requestGender = RequestBody.create(MediaType.parse("multipart/data"), gender);
+
         MultipartBody.Part multiPartBody = MultipartBody.Part.createFormData("model_pic", imageFile.getName(), requestImage);
 
-        Call<RequestBody> call = postApi.uploadFile(multiPartBody,requestPointX,requestPointY);
+        Call<ResponseBody> call = postApi.uploadFile(multiPartBody,requestPointX,requestPointY,requestTall,requestGender);
 
-        call.enqueue(new Callback<RequestBody>() {
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Log.d("사진 전송 good", "good");
-                Log.d("좌표전송 성공",""+height+width);
+                Log.d("좌표전송 성공","good"+height+width);
+                Log.d("정보전송 성공","good"+tall+gender);
             }
 
             @Override
-            public void onFailure(Call<RequestBody> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Log.d("사진 전송 fail", "fail");
                 Log.d("좌표전송 실패", "fail"+height+width);
+                Log.d("정보전송 실패","fail"+tall+gender);
             }
         });
     }

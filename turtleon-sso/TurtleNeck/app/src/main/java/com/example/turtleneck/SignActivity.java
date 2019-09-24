@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -73,23 +74,21 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId()){
             case R.id.SignBtn: {
                 // 회원가입 정보 가져오기
-                // eID = (EditText) findViewById(R.id.ID);
                 ePW1 = (EditText) findViewById(R.id.PW1);
                 ePW2 = (EditText) findViewById(R.id.PW2);
                 eName = (EditText) findViewById(R.id.Name);
                 eEmail = (EditText) findViewById(R.id.Email);
 
                 // 회원가입 정보 String으로 가져오기
-                // String ID = eID.getText().toString().trim();
                 final String username = eName.getText().toString().trim();
                 final String password1 = ePW1.getText().toString().trim();
                 final String password2 = ePW2.getText().toString().trim();
                 final String emailadress = eEmail.getText().toString().trim();
 
+                // 디비로 회원가입 정보 전송
                 if (isValidEmail(emailadress)) {
                     if (isValidPassword(password1, password2)) {
                         if (!emailadress.isEmpty() && !password1.isEmpty() && !username.isEmpty() && !password2.isEmpty()) {
-                            // 디비로 회원가입 정보 전송
 
                             // 네트워크 빌드
                             Retrofit retrofit = new Retrofit.Builder()
@@ -99,21 +98,22 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
 
                             DjangoApi postApi = retrofit.create(DjangoApi.class);
 
+                            // 값 정리
                             RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
-                            RequestBody requestpassword1 = RequestBody.create(MediaType.parse("multipart/data"), password1);
-                            RequestBody requestpassword2 = RequestBody.create(MediaType.parse("multipart/data"), password2);
-                            RequestBody requestemail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
+                            RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
+                            RequestBody requestPassword1 = RequestBody.create(MediaType.parse("multipart/data"), password1);
+                            RequestBody requestPassword2 = RequestBody.create(MediaType.parse("multipart/data"), password2);
 
-                            Call<RequestBody> call = postApi.post_signup(requestUsername,requestemail,requestpassword1,requestpassword2);
+                            Call<ResponseBody> call = postApi.post_signup(requestUsername,requestEmail,requestPassword1,requestPassword2);
 
-                            call.enqueue(new Callback<RequestBody>() {
+                            call.enqueue(new Callback<ResponseBody>() {
                                 @Override
-                                public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
-
+                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                    Log.d("회원가입 정보 전송 성공",""+username+"/"+password1+"/"+password2+"/"+emailadress);
                                 }
 
                                 @Override
-                                public void onFailure(Call<RequestBody> call, Throwable t) {
+                                public void onFailure(Call<ResponseBody> call, Throwable t) {
                                     Log.i("GGG", "실패 메시지 : " + t.getMessage());
                                     Log.i("GGG", "요청 메시지 : " + call.request());
                                 }

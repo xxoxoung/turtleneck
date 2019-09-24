@@ -46,7 +46,7 @@
                 android:layout_alignParentTop="true"
                 android:ems="10"
                 android:inputType="textPassword"
-                android:hint="비밀번호" />
+                android:hint="비밀번호 (8자 이상 영어, 숫자)" />
         </TableRow>
         <TableRow>
             <Button

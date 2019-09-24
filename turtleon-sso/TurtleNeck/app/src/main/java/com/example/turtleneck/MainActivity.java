@@ -76,10 +76,6 @@ public class MainActivity extends AppCompatActivity
             // 진단 확인 화면으로 이동
             Intent intent2 = new Intent(this, ConfirmActivity.class);
             startActivity(intent2);
-        } else if (id == R.id.nav_ModifyDia) {
-            // 진단 정보 수정 화면으로 이동
-            Intent intent3 = new Intent(this, ModifyDiagActivity.class);
-            startActivity(intent3);
         } else if (id == R.id.nav_ModifySign) {
             // 회원 정보 수정 화면으로 이동
             Intent intent4 = new Intent(this, ModifySignActivity.class);
