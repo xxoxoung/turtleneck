@@ -48,6 +48,12 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     Button GoServer;
     final static int TAKE_PHOTO = 1;
 
+    // 사진 이름을 위한 변수
+    double cnt = 0;
+
+    // 서버에서 알고리즘을 돌리기 위한 변수
+    String confirm = "1";
+
     public double height;                             // 사진 세로 크기
     public double width;                              // 사진 가로 크기
 
@@ -67,12 +73,13 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         tall = intent.getStringExtra("tall");
         gender = intent. getStringExtra("gender");
 
-
+        // 레이아웃 연결
         imageView = findViewById(R.id.DiaPht);  // 이미지뷰
         GoCam = findViewById(R.id.GoCam);       // 카메라
         GoServer = findViewById(R.id.GoServer); // 서버로 전송
         HelpImg = findViewById(R.id.HelpImg);   // 도움말
 
+        // 클릭 리스너 연결
         GoServer.setOnClickListener(this);      // 서버로
         GoCam.setOnClickListener(this);         // 카메라로
         HelpImg.setOnClickListener(this);       // 도움말 아이콘
@@ -90,11 +97,10 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) { }
     }
 
-    // 버튼 클릭 이벤트리스너 처리
+    // 클릭 이벤트리스너 처리
     @Override
     public void onClick(View v) {
         switch(v.getId()){
@@ -150,10 +156,15 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
 
     // 카메라로 촬영한 이미지를 파일로 저장
     private File createImageFile() throws IOException {
-        // 파일 이름 만들기
 
+        // 파일 이름 만들기
+        // 이름 변경 > 유저이름 cnt++
+        cnt++;
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
+
+        String imageFileName = timeStamp + "_" + cnt;
+        // String imageFileName = username + cnt;
+
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
                 imageFileName,  /* prefix */
@@ -233,6 +244,9 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         String point_x = Double.toString(width);
         String point_y = Double.toString(height);
 
+        String count = Double.toString(cnt);
+
+        // 네트워크 빌드
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(DjangoApi.DJANGO_SITE)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -243,28 +257,29 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         RequestBody requestImage = RequestBody.create(MediaType.parse("multipart/data"), imageFile);
         RequestBody requestPointX = RequestBody.create(MediaType.parse("multipart/data"), point_x);
         RequestBody requestPointY = RequestBody.create(MediaType.parse("multipart/data"), point_y);
-        //RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data", username);
+
+        //RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
+
+        RequestBody requestCount = RequestBody.create(MediaType.parse("multipart/data"), count);
+        RequestBody requestConfirm = RequestBody.create(MediaType.parse("multipart/data"), confirm);
 
         RequestBody requestTall = RequestBody.create(MediaType.parse("multipart/data"), tall);
         RequestBody requestGender = RequestBody.create(MediaType.parse("multipart/data"), gender);
 
+
         MultipartBody.Part multiPartBody = MultipartBody.Part.createFormData("model_pic", imageFile.getName(), requestImage);
 
-        Call<ResponseBody> call = postApi.uploadFile(multiPartBody,requestPointX,requestPointY,requestTall,requestGender);
+        Call<ResponseBody> call = postApi.uploadFile(multiPartBody,requestPointX,requestPointY,requestTall,requestGender,requestCount,requestConfirm);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.d("사진 전송 good", "good");
-                Log.d("좌표전송 성공","good"+height+width);
-                Log.d("정보전송 성공","good"+tall+gender);
+
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Log.d("사진 전송 fail", "fail");
-                Log.d("좌표전송 실패", "fail"+height+width);
-                Log.d("정보전송 실패","fail"+tall+gender);
+
             }
         });
     }

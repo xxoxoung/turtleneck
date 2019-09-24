@@ -32,8 +32,8 @@ public interface DjangoApi {
             @Part("email") RequestBody emailadress);
 
     // GetPhotoActivity uploadImage()
-    // 사진 + 좌표 전송
-    // 키, 성별 추가
+    // 사진, 좌표, 키, 성별, 알고리즘 변수
+    // 유저네임
     @Multipart
     @POST("image/upload/")
     Call<ResponseBody> uploadFile(
@@ -41,12 +41,7 @@ public interface DjangoApi {
             @Part("point_x") RequestBody point_x,
             @Part("point_y") RequestBody point_y,
             @Part("tall") RequestBody tall,
-            @Part("gender") RequestBody gender);
-
-//    // DiagActivity 진단 관련 정보 전송
-//    @Multipart
-//    @POST("image/upload/")
-//    Call<ResponseBody> post_diag(
-//        @Part("tall") RequestBody tall,
-//        @Part("gender") RequestBody gender);
+            @Part("gender") RequestBody gender,
+            @Part("count") RequestBody count,
+            @Part("confirm") RequestBody confirm);
 }
