@@ -11,7 +11,7 @@ import retrofit2.http.Part;
 
 public interface DjangoApi {
 
-    String DJANGO_SITE = "http://6ce9cd5c.ngrok.io/";
+    String DJANGO_SITE = "http://89d1965d.ngrok.io/";
     //내 authtoken 주소/ngrok 끄면 다시 켜서 주소 바꿔줘야함..
 
     // SignActivity 회원가입

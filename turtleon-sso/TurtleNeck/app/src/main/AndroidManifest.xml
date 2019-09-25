@@ -36,10 +36,20 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-        <activity android:name=".DiagActivity"></activity>
+        <activity android:name=".DiagActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".GetPhotoActivity"></activity>
         <activity android:name=".HelpPhotoActivity"></activity>
-        <activity android:name=".GraphActivity"></activity>
+        <activity android:name=".GraphActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity android:name=".ConfirmActivity"></activity>
         <activity android:name=".ModifySignActivity"></activity>

@@ -1,55 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".GraphActivity">
 
-    // 임시 문구
-    // 나중에 디비에서 결과값 보여주기
-    <TextView
-        android:text="당신의 진단 결과는?"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:id="@+id/ggg"/>
-
-    //진단 그래프로 교체하기!!!
-    <ImageView
-        android:id="@+id/GraphLogo"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/helpicon"
-        android:layout_below="@id/ggg"/>
-
-    // 진단 저장하고 메인으로 가는 버튼
-    // 나중에 수정하기,,,,!!!
-    <!--<Button-->
-        <!--android:id="@+id/SaveDiagBtn"-->
+    <!--// 임시 문구-->
+    <!--// 나중에 디비에서 결과값 보여주기-->
+    <!--<TextView-->
+        <!--android:text="당신의 진단 결과는?"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="진단 저장"-->
-        <!--android:layout_below="@id/GraphLogo"-->
-        <!--/>-->
-    <!---->
+        <!--android:layout_marginTop="40dp"-->
+        <!--android:textSize="24dp"-->
+        <!--android:textStyle="bold"-->
+        <!--android:id="@+id/ggg"/>-->
 
-    // 진단 저장 안하고 그냥 메인으로 가는 버튼
-    <Button
-        android:id="@+id/GotoMainBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="메인으로"
-        android:layout_below="@id/GraphLogo"
-        />
-</RelativeLayout>
+    <!--//진단 그래프로 교체하기!!!-->
+    <!--<ImageView-->
+        <!--android:id="@+id/GraphLogo"-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="200dp"-->
+        <!--android:layout_marginTop="50dp"-->
+        <!--android:layout_marginBottom="50dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:src="@drawable/helpicon"-->
+        <!--android:layout_below="@id/ggg"/>-->
+    <LinearLayout
+        android:id="@+id/ggg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
+        <LinearLayout
+            android:id="@+id/chart_bar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--// 수정중-->
+    <!--<Button-->
+        <!--android:id="@+id/GotoMainBtn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="메인으로"-->
+        <!--tools:ignore="MissingConstraints" />-->
+</android.support.constraint.ConstraintLayout>

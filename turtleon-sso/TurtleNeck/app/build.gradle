@@ -33,4 +33,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:1.7.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+    implementation files('lib/achartengine-1.2.0.jar')
 }
