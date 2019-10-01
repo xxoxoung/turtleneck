@@ -61,7 +61,6 @@ public class DiagActivity extends AppCompatActivity implements View.OnClickListe
                 Gender = arrayList.get(position);
                 Toast.makeText(getApplicationContext(), arrayList.get(position) + "가 선택되었습니다.",Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
@@ -77,41 +76,15 @@ public class DiagActivity extends AppCompatActivity implements View.OnClickListe
 
         if(!tall.isEmpty()) {
             Intent intent = new Intent(this, GetPhotoActivity.class);
-            // tall, gender 정보 전송
+
+            // tall,gender정보를 GetPhotoActivity로 전송
             intent.putExtra("tall",tall);
             intent.putExtra("gender",gender);
+
             startActivity(intent);
             finish();
         } else {
             Toast.makeText(getApplicationContext(),"키를 입력해주세요!", Toast.LENGTH_LONG).show();
         }
-//
-//        // 네트워크 빌드
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(DjangoApi.DJANGO_SITE)
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .build();
-//
-//        DjangoApi postApi = retrofit.create(DjangoApi.class);
-//
-//        // 값 정리
-//        RequestBody requestTall = RequestBody.create(MediaType.parse("multipart/data"), tall);
-//        RequestBody requestGender = RequestBody.create(MediaType.parse("multipart/data"), gender);
-//
-//        Call<ResponseBody> call = postApi.post_diag(requestTall,requestGender);
-//
-//        call.enqueue(new Callback<ResponseBody>() {
-//            @Override
-//            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                Log.d("진단 정보 전송 성공",""+tall+"/"+gender);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                Log.d("진단 정보 전송 실패",""+tall+"/"+gender);
-//                Log.i("GGG", "실패 메시지 : " + t.getMessage());
-//                Log.i("GGG", "요청 메시지 : " + call.request());
-//            }
-//        });
     }
 }

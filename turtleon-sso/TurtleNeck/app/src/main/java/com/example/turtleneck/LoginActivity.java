@@ -28,7 +28,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private EditText eEmail;
     private EditText ePW;
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -51,8 +50,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.GoSignBtn: {
-                // 회원가입 필요
-                // 회원가입 화면으로 이동
+                // 회원가입 필요 > 회원가입 화면으로 이동
                 Intent intent2 = new Intent(this, SignActivity.class);
                 startActivity(intent2);
                 break;
@@ -73,14 +71,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         DjangoApi postApi = retrofit.create(DjangoApi.class);
 
-                        // 값 정리
+                        // multipart 값 정리
                         RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
                         RequestBody requestPassword = RequestBody.create(MediaType.parse("multipart/data"), password);
                         RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
 
-                        Call<ResponseBody> call = postApi.post_login(requestUsername,requestPassword,requestEmail);
-
-                        call.enqueue(new Callback<ResponseBody>() {
+                        // 로그인 정보 전송 > 로그인 요청
+                        Call<ResponseBody> post_logincall = postApi.post_login(requestUsername,requestPassword,requestEmail);
+                        post_logincall.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 Log.d("로그인 정보 전송 성공",""+username+"/"+password);
@@ -92,6 +90,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Toast.makeText(getApplicationContext(),"아이디와 비밀 번호를 확인해주세요!", Toast.LENGTH_LONG).show();
                             }
                         });
+
+                        //로그인 여부 확인하는 코드 추가 필요
+//                        //GET?
+//                        Call<ResponseBody> get_logincall = postApi.get_login();
+//                        get_logincall.enqueue(new Callback<ResponseBody>() {
+//                            @Override
+//                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//
+//                            }
+//                        });
 
                         // 메인 화면으로 이동
                         Intent intent1 = new Intent(this, MainActivity.class);

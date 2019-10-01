@@ -125,7 +125,6 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
             case R.id.HelpImg:{
                 Intent intent2 = new Intent(this, HelpPhotoActivity.class);
                 startActivity(intent2);
-                finish();
                 break;
             }
         }
@@ -191,7 +190,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
                             ExifInterface ei = new ExifInterface(mCurrentPhotoPath);
                             int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
-                            // 회전된 사진
+                            // 사진 회전하기
                             Bitmap rotatedBitmap = null;
                             switch (orientation) {
                                 case ExifInterface.ORIENTATION_ROTATE_90 : {
@@ -240,10 +239,9 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     public void uploadImage() {
         File imageFile = new File(mCurrentPhotoPath);
 
-        // 좌표값 String으로 변환
+        // double을 String으로 변환
         String point_x = Double.toString(width);
         String point_y = Double.toString(height);
-
         String count = Double.toString(cnt);
 
         // 네트워크 빌드
@@ -254,29 +252,31 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
 
         DjangoApi postApi = retrofit.create(DjangoApi.class);
 
+        // 사용자의 진단 사진 정보
         RequestBody requestImage = RequestBody.create(MediaType.parse("multipart/data"), imageFile);
         RequestBody requestPointX = RequestBody.create(MediaType.parse("multipart/data"), point_x);
         RequestBody requestPointY = RequestBody.create(MediaType.parse("multipart/data"), point_y);
 
+        // 로그인 + 세션 유지 성공하면 username도 같이 보내기 (진단 확인에 쓰일 예정)
         //RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
 
+        // 알고리즘을 위한 변수 (사진 이름 인식, 알고리즘 실행 변수)
         RequestBody requestCount = RequestBody.create(MediaType.parse("multipart/data"), count);
         RequestBody requestConfirm = RequestBody.create(MediaType.parse("multipart/data"), confirm);
 
+        // 사용자의 진단 정보
         RequestBody requestTall = RequestBody.create(MediaType.parse("multipart/data"), tall);
         RequestBody requestGender = RequestBody.create(MediaType.parse("multipart/data"), gender);
 
-
         MultipartBody.Part multiPartBody = MultipartBody.Part.createFormData("model_pic", imageFile.getName(), requestImage);
 
+        // 정보를 하나로 묶어서 서버로 전송
         Call<ResponseBody> call = postApi.uploadFile(multiPartBody,requestPointX,requestPointY,requestTall,requestGender,requestCount,requestConfirm);
-
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
             }
-
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
