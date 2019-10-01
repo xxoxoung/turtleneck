@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button LoginBtn;
     private Button GoSignBtn;
     private EditText eName;
-    private EditText eEmail;
+    //private EditText eEmail;
     private EditText ePW;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // 로그인 정보 가져오기
         eName = (EditText) findViewById(R.id.Name);
-        eEmail = (EditText) findViewById(R.id.Email);
+        //eEmail = (EditText) findViewById(R.id.Email);
         ePW = (EditText) findViewById(R.id.PW);
 
     }
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.LoginBtn: {
                 final String username = eName.getText().toString().trim();
                 final String password = ePW.getText().toString().trim();
-                final String emailadress = eEmail.getText().toString().trim();
+                //final String emailadress = eEmail.getText().toString().trim();
 
                 if(!username.isEmpty()) {
                     if(!username.isEmpty()) {
@@ -74,10 +74,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // multipart 값 정리
                         RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
                         RequestBody requestPassword = RequestBody.create(MediaType.parse("multipart/data"), password);
-                        RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
+                        //RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
+
+                        //Call<ResponseBody> post_logincall = postApi.post_login(requestUsername,requestPassword,requestEmail);
 
                         // 로그인 정보 전송 > 로그인 요청
-                        Call<ResponseBody> post_logincall = postApi.post_login(requestUsername,requestPassword,requestEmail);
+                        Call<ResponseBody> post_logincall = postApi.post_login(requestUsername,requestPassword);
                         post_logincall.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -91,20 +93,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         });
 
+                        String confirm_username = "fofo";
                         //로그인 여부 확인하는 코드 추가 필요
-//                        //GET?
-//                        Call<ResponseBody> get_logincall = postApi.get_login();
-//                        get_logincall.enqueue(new Callback<ResponseBody>() {
-//                            @Override
-//                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//
-//                            }
-//
-//                            @Override
-//                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-//
-//                            }
-//                        });
+                        //GET?
+                        Call<ResponseBody> get_logincall = postApi.get_login(confirm_username);
+                        get_logincall.enqueue(new Callback<ResponseBody>() {
+                            @Override
+                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                Log.d("성공~~~~~~~~~~",""+response.body());
+                            }
+
+                            @Override
+                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                Log.d("실~~~~~~~~패!!!!!","");
+                            }
+                        });
 
                         // 메인 화면으로 이동
                         Intent intent1 = new Intent(this, MainActivity.class);

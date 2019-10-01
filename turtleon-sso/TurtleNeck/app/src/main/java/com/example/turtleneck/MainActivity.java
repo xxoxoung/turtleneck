@@ -1,18 +1,20 @@
 package com.example.turtleneck;
 
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.google.android.youtube.player.YouTubePlayerFragment;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,17 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        // 유튜브 플레이어
+        // API_KEY = "AIzaSyBApq9HjukG3rAcuQd6kEC-IhQ_HKuobIg"
+        // url = "8y8SjUIib28"
+        YoutubeFragment youF = new YoutubeFragment();
+        YoutubeFragment.newInstance("8y8SjUIib28");
+        Log.d("유튜브 플레이어!!!!","인스턴스 생성 성공");
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        Log.d("FragmentManager 웅앵","!!!!!!!!!!!!!!!!!!!!!!");
+        transaction.add(R.id.youtube_fragment,youF).commit();
+        Log.d("FragmentManager ㅇㅇㅇㅇㅇㅇㅇ","!!!!!!!!!!!!!!!!!!!!!!");
     }
 
     @Override
