@@ -94,20 +94,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         });
 
                         String confirm_username = "fofo";
-                        //로그인 여부 확인하는 코드 추가 필요
-                        //GET?
-                        Call<ResponseBody> get_logincall = postApi.get_login(confirm_username);
-                        get_logincall.enqueue(new Callback<ResponseBody>() {
+//                        //로그인 여부 확인하는 코드 추가 필요
+//                        //GET?
+//                        Call<ResponseBody> get_logincall = postApi.get_login(confirm_username);
+//                        get_logincall.enqueue(new Callback<ResponseBody>() {
+//                            @Override
+//                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                                Log.d("성공~~~~~~~~~~",""+response.body());
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                                Log.d("실~~~~~~~~패!!!!!","");
+//                            }
+//                        });
+
+                        // 토큰 확인 POST
+                        Call<ResponseBody> post_confirmcall = postApi.post_confirm();
+                        post_confirmcall.enqueue(new Callback<ResponseBody>() {
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                Log.d("성공~~~~~~~~~~",""+response.body());
                             }
 
                             @Override
                             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                Log.d("실~~~~~~~~패!!!!!","");
                             }
                         });
+
 
                         // 메인 화면으로 이동
                         Intent intent1 = new Intent(this, MainActivity.class);

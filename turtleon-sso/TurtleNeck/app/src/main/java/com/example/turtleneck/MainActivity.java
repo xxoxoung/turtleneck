@@ -1,20 +1,22 @@
 package com.example.turtleneck;
 
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
 
-import com.google.android.youtube.player.YouTubePlayerFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    Button youtubeButton;
+    Button newsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,16 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        // 유튜브 플레이어
-        // API_KEY = "AIzaSyBApq9HjukG3rAcuQd6kEC-IhQ_HKuobIg"
-        // url = "8y8SjUIib28"
-        YoutubeFragment youF = new YoutubeFragment();
-        YoutubeFragment.newInstance("8y8SjUIib28");
-        Log.d("유튜브 플레이어!!!!","인스턴스 생성 성공");
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        Log.d("FragmentManager 웅앵","!!!!!!!!!!!!!!!!!!!!!!");
-        transaction.add(R.id.youtube_fragment,youF).commit();
-        Log.d("FragmentManager ㅇㅇㅇㅇㅇㅇㅇ","!!!!!!!!!!!!!!!!!!!!!!");
+        youtubeButton = (Button) findViewById(R.id.youtubeButton);
+        newsButton = (Button) findViewById(R.id.newsButton);
     }
 
     @Override
@@ -52,13 +46,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -75,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    // 네비게이터바에서 메뉴 선택
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -104,11 +91,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.nav_FAQ) {
             // 고객센터 화면으로 이동
-
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    // YoutubeAcitivity 로 이동
+    public void GoYoutube (View view) {
+        Intent intent1 = new Intent(this, YoutubeActivity.class);
+        startActivity(intent1);
+    }
+
+    // NewsAcitivity 로 이동
+    public void GoNews (View view) {
+        Intent intent2 = new Intent(this, NewsActivity.class);
+        startActivity(intent2);
     }
 }

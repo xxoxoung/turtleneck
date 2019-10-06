@@ -13,7 +13,7 @@ import retrofit2.http.Path;
 
 public interface DjangoApi {
 
-    String DJANGO_SITE = "http://eb3cfa3f.ngrok.io/";
+    String DJANGO_SITE = "http://72e96f1a.ngrok.io/";
     //내 authtoken 주소/ngrok 끄면 다시 켜서 주소 바꿔줘야함..
 
     // SignActivity
@@ -38,16 +38,21 @@ public interface DjangoApi {
     // LoginActivity
     // 로그인 정보 전송
     @Multipart
-    @POST("rest-auth/login/")
+    @POST("login/")
     Call<ResponseBody> post_login(
             @Part("username") RequestBody username,
             @Part("password") RequestBody password);
 
     // LoginActivity
     // 로그인 여부 확인
-    @GET("rest-auth/registration/{username}")
+    @GET("login/\"Authorization\":\"b6cd1993966624068148dac8ac6cdc4de4ce3715\"")
     Call<ResponseBody> get_login(
             @Path("username") String username);
+
+    // LoginActivity
+    // 로그인 여부 확인
+    @POST("login/\"Authorization\":\"b6cd1993966624068148dac8ac6cdc4de4ce3715\"")
+    Call<ResponseBody> post_confirm();
 
     // GetPhotoActivity uploadImage()
     // 사진, 좌표, 키, 성별, 진단번호 변수(count), 알고리즘 변수(confirm)

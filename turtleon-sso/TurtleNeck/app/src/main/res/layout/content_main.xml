@@ -9,19 +9,30 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <!--실제 메인 화면 부분-->
-    <!--유튜브 재생기 띄우기-->
-   <FrameLayout
+    <Button
+        android:id="@+id/youtubeButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="GoYoutube"
+        android:text="유튜브 보러가기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.064"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_weight="1"
-        android:id="@+id/youtube_fragment">
-   </FrameLayout>
+        app:layout_constraintVertical_bias="0.444" />
+
+    <Button
+        android:id="@+id/newsButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="GoNews"
+        android:text="인터넷 뉴스 보러가기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.547" />
 
 </android.support.constraint.ConstraintLayout>

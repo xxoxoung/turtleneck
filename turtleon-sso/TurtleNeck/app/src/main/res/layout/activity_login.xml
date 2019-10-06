@@ -21,6 +21,7 @@
                 android:ems="10"
                 android:hint="이름" />
         </TableRow>
+
         <!--<TableRow>-->
             <!--<EditText-->
                 <!--android:id="@+id/Email"-->
@@ -34,6 +35,7 @@
                 <!--android:ems="13"-->
                 <!--android:hint="이메일 (exam@mail.com)" />-->
         <!--</TableRow>-->
+
         <TableRow>
             <EditText
                 android:id="@+id/PW"
