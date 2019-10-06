@@ -11,12 +11,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button youtubeButton;
-    Button newsButton;
+    ImageView youtubeButton;
+    ImageView newsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        youtubeButton = (Button) findViewById(R.id.youtubeButton);
-        newsButton = (Button) findViewById(R.id.newsButton);
+        youtubeButton = (ImageView) findViewById(R.id.youtubeButton);
+        newsButton = (ImageView) findViewById(R.id.newsButton);
     }
 
     @Override
@@ -58,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 

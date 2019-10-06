@@ -9,30 +9,30 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <Button
+    <ImageView
         android:id="@+id/youtubeButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:onClick="GoYoutube"
-        android:text="유튜브 보러가기"
+        android:src="@drawable/youtube"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintVertical_bias="0.4" />
 
-    <Button
+    <ImageView
         android:id="@+id/newsButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:onClick="GoNews"
-        android:text="인터넷 뉴스 보러가기"
+        android:src="@drawable/newspaper"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.75"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.547" />
+        app:layout_constraintVertical_bias="0.4" />
 
 </android.support.constraint.ConstraintLayout>
