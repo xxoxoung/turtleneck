@@ -8,13 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import java.io.IOException;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -27,7 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class SignActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button SignBtn;
-    // private EditText eID;
     private EditText ePW1;
     private EditText ePW2;
     private EditText eName;

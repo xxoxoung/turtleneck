@@ -58,4 +58,13 @@ public interface DjangoApi {
             @Part("gender") RequestBody gender,
             @Part("count") RequestBody count,
             @Part("confirm") RequestBody confirm);
+
+    // ModifySignActivity
+    // 회원가입 정보 수정
+    // 로그인 구현 후 username 추가 필요
+    @Multipart
+    @POST("rest-auth/registration/")
+    Call<ResponseBody> post_modifysign(
+            @Part("password") RequestBody password,
+            @Part("emailadress") RequestBody emailadress);
 }
