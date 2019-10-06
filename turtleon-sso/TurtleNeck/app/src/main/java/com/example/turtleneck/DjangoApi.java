@@ -1,10 +1,10 @@
 package com.example.turtleneck;
-//업로드
+
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
+
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -25,15 +25,6 @@ public interface DjangoApi {
             @Part("emailadress") RequestBody emailadress,
             @Part("password1") RequestBody password1,
             @Part("password2") RequestBody password2);
-
-    // LoginActivity
-    // 로그인 정보 전송
-//    @Multipart
-//    @POST("login/")
-//    Call<ResponseBody> post_login(
-//            @Part("username") RequestBody username,
-//            @Part("password") RequestBody password,
-//            @Part("email") RequestBody emailadress);
 
     // LoginActivity
     // 로그인 정보 전송

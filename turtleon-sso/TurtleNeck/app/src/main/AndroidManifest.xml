@@ -47,6 +47,14 @@
 
         <activity android:name=".ConfirmActivity"></activity>
         <activity android:name=".ModifySignActivity"></activity>
+        <activity android:name=".BoardActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".FAQActivity"></activity>
 
         <provider
             android:name="android.support.v4.content.FileProvider"

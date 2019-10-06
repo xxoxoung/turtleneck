@@ -76,21 +76,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             // 진단 확인 화면으로 이동
             Intent intent2 = new Intent(this, ConfirmActivity.class);
             startActivity(intent2);
-        } else if (id == R.id.nav_ModifySign) {
-            // 회원 정보 수정 화면으로 이동
-            Intent intent4 = new Intent(this, ModifySignActivity.class);
-            startActivity(intent4);
         } else if (id == R.id.nav_Board) {
             // 게시글 관리 화면으로 이동
-
+            Intent intent4 = new Intent(this, BoardActivity.class);
+            startActivity(intent4);
         } else if (id == R.id.nav_Setting) {
             // 설정 화면으로 이동
-
-        } else if (id == R.id.nav_Send) {
-            // 오류보내기 화면으로 이동
-
+            Intent intent5 = new Intent(this, SettingActivity.class);
+            startActivity(intent5);
         } else if (id == R.id.nav_FAQ) {
             // 고객센터 화면으로 이동
+            Intent intent6 = new Intent(this, FAQActivity.class);
+            startActivity(intent6);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

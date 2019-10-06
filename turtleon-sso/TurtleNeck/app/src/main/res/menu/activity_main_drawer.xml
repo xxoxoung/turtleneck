@@ -15,10 +15,6 @@
             android:icon="@drawable/ic_menu_gallery"
             android:title="진단 확인" />
         <item
-            android:id="@+id/nav_ModifySign"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="회원 정보 수정" />
-        <item
             android:id="@+id/nav_Board"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="게시글 관리" />
@@ -30,10 +26,6 @@
 
     <item android:title="Communicate">
         <menu>
-            <item
-                android:id="@+id/nav_Send"
-                android:icon="@drawable/ic_menu_share"
-                android:title="오류보내기" />
             <item
                 android:id="@+id/nav_FAQ"
                 android:icon="@drawable/ic_menu_send"
