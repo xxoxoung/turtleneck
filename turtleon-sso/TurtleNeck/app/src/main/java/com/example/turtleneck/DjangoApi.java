@@ -10,6 +10,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface DjangoApi {
 
@@ -34,16 +35,27 @@ public interface DjangoApi {
             @Part("username") RequestBody username,
             @Part("password") RequestBody password);
 
-    // LoginActivity
+    //LoginActivity
     // 로그인 여부 확인
-    @GET("login/\"Authorization\":\"b6cd1993966624068148dac8ac6cdc4de4ce3715\"")
+    // Path 사용한 경우 > username에 대한 정보 가져옴
+    // 최종 호출 주소 > (GET 뒤에 써진 주소)/(username)
+    // rest-auth/user/baba
+    @GET("rest-auth/user/{username}")
     Call<ResponseBody> get_login(
             @Path("username") String username);
 
+    // Query 사용한 경우 > 다수의 json 데이터 가져올 때
+    // 가져온 데이터 처리를 위한 for문 필요
+    // 최종 호출 주소 > (GET 뒤에 써진 주소)?username=(username)
+    // rest-auth/user?username=baba
+//    @GET("rest-auth/user")
+//    Call<List<ResponseBody>> get_login(
+//            @Query("username") String username);
+
     // LoginActivity
     // 로그인 여부 확인
-    @POST("login/\"Authorization\":\"b6cd1993966624068148dac8ac6cdc4de4ce3715\"")
-    Call<ResponseBody> post_confirm();
+    // @POST("login/\"Authorization\":\"b6cd1993966624068148dac8ac6cdc4de4ce3715\"")
+    // Call<ResponseBody> post_confirm();
 
     // GetPhotoActivity uploadImage()
     // 사진, 좌표, 키, 성별, 진단번호 변수(count), 알고리즘 변수(confirm)

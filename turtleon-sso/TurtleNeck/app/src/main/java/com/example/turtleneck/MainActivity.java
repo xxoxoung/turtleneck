@@ -1,6 +1,7 @@
 package com.example.turtleneck;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -102,7 +103,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     // NewsAcitivity 로 이동
     public void GoNews (View view) {
-        Intent intent2 = new Intent(this, NewsActivity.class);
+
+        // 뉴스기사 URL 추가되면 추가하기!!!
+        // 2019.10.09 기준 4개
+        String newsString[] = {"https://www.insight.co.kr/news/236917",
+                "http://www.polinews.co.kr/news/article.html?no=423980",
+                "http://www.polinews.co.kr/news/article.html?no=423741#0B4G",
+                "http://www.munhwa.com/news/view.html?no=2019091001032842000003"};
+
+        // 랜덤값을 위한 변수
+        // (최대값-최소값+1)+최소값
+        int i = (int)(Math.random() * 4)+0;
+
+        // 랜덤으로 뉴스 기사 페이지로 이동해서 보여주기
+        Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse(newsString[i]));
         startActivity(intent2);
+
+//        Intent intent2 = new Intent(this, NewsActivity.class);
+//        startActivity(intent2);
     }
 }

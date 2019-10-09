@@ -16,7 +16,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
     // 시작 버튼 클릭 이벤트
     public void onClick(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
+        //Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
         finish();
     }

@@ -2,6 +2,7 @@ package com.example.turtleneck;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 .addConverterFactory(GsonConverterFactory.create())
                                 .build();
 
-                        DjangoApi postApi = retrofit.create(DjangoApi.class);
+                        final DjangoApi postApi = retrofit.create(DjangoApi.class);
 
                         // multipart 값 정리
                         RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
@@ -84,6 +85,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                 Log.d("로그인 정보 전송 성공",""+username+"/"+password);
+
+                                String confirm_username = "baba";
+                                //로그인 여부 확인하는 코드 추가 필요
+                                //GET?
+                                Call<ResponseBody> get_logincall = postApi.get_login(confirm_username);
+                                get_logincall.enqueue(new Callback<ResponseBody>() {
+                                    @Override
+                                    public void onResponse(@NonNull Call<ResponseBody> call,@NonNull Response<ResponseBody> response) {
+                                        if(response.isSuccessful()) {
+                                            if(response.body() != null) {
+                                                Log.d("성공~~~~~~~~~~",""+response.body().toString());
+                                            }
+                                        }
+                                        Log.d("NULL값 가져옴~~~~~~~~~~","");
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                                        Log.d("실~~~~~~~~패!!!!!","");
+                                    }
+                                });
                             }
 
                             @Override
@@ -93,14 +115,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             }
                         });
 
-                        String confirm_username = "fofo";
+//                        String confirm_username = "baba";
 //                        //로그인 여부 확인하는 코드 추가 필요
 //                        //GET?
 //                        Call<ResponseBody> get_logincall = postApi.get_login(confirm_username);
 //                        get_logincall.enqueue(new Callback<ResponseBody>() {
 //                            @Override
-//                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                                Log.d("성공~~~~~~~~~~",""+response.body());
+//                            public void onResponse(@NonNull Call<ResponseBody> call,@NonNull Response<ResponseBody> response) {
+//                                if(response.isSuccessful()) {
+//                                    if(response.body() != null) {
+//                                        Log.d("성공~~~~~~~~~~",""+response.body().toString());
+//                                    }
+//                                }
+//                                Log.d("NULL값 가져옴~~~~~~~~~~","");
 //                            }
 //
 //                            @Override
@@ -110,16 +137,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                        });
 
                         // 토큰 확인 POST
-                        Call<ResponseBody> post_confirmcall = postApi.post_confirm();
-                        post_confirmcall.enqueue(new Callback<ResponseBody>() {
-                            @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            }
-
-                            @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            }
-                        });
+//                        Call<ResponseBody> post_confirmcall = postApi.post_confirm();
+//                        post_confirmcall.enqueue(new Callback<ResponseBody>() {
+//                            @Override
+//                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                            }
+//                        });
 
 
                         // 메인 화면으로 이동
