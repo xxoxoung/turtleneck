@@ -1,6 +1,7 @@
 package com.example.turtleneck;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
@@ -26,6 +27,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // 좀 게시글의 형태로 수정 필요
     TextView result;
 
+    // 유저
+    public String username;
+
+    // 헤더에 띄워주기 위한 텍스트뷰
+    public TextView tUsername;
+    public TextView tEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        View header= navigationView.getHeaderView(0);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -43,12 +52,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         youtubeButton = (ImageView) findViewById(R.id.youtubeButton);
         newsButton = (ImageView) findViewById(R.id.newsButton);
         result = (TextView) findViewById(R.id.result);
+        tUsername = (TextView) header.findViewById(R.id.textUsername) ;
+        tEmail = (TextView) header.findViewById(R.id.textEmailaddress);
 
         // 내장 디비 연결
         DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
         result.setText(dbHelper.GetResultBoard());
-    }
 
+        // LoginActivity로부터 유저이름 받아오기
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+
+        // 유저 이름, 이메일 가져와서 헤더에 띄우기
+        tUsername.setText(username);
+        tUsername.setTextColor(Color.BLACK);
+        tEmail.setText(dbHelper.GetHeader(username));
+        tEmail.setTextColor(Color.BLACK);
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

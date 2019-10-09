@@ -90,8 +90,30 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                             // 내장 디비 이용한 회원가입 구현
                             // 내장 디비 연결
                             DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
-                            dbHelper.InsertSign(username, password1, emailadress);
+                            int var;
+                            var = dbHelper.InsertSign(username, password1, emailadress);
 
+                            // 로그인 성공한 경우
+                            if (var == 0) {
+                                // 로그인 화면으로 넘어가기
+                                Intent intent1 = new Intent(this, LoginActivity.class);
+                                startActivity(intent1);
+                                finish();
+                            }
+                            // 로그인 실패한 경우
+                            // 1009 기준 안뜨는중
+                            else {
+                                Toast.makeText(getApplicationContext(),"중복된 아이디입니다!", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "필수 사항을 입력해주세요!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 //                            // 네트워크 빌드
 //                            Retrofit retrofit = new Retrofit.Builder()
@@ -121,17 +143,3 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
 //                                    Log.i("GGG", "요청 메시지 : " + call.request());
 //                                }
 //                            });
-
-                            Intent intent1 = new Intent(this, LoginActivity.class);
-                            startActivity(intent1);
-                            finish();
-                            break;
-                        } else {
-                            Toast.makeText(getApplicationContext(), "필수 사항을 입력해주세요!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }
-            }
-        }
-    }
-}

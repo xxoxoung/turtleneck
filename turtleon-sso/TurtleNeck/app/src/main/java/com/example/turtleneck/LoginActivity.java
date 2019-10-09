@@ -69,14 +69,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                         // 로그인 성공한 경우
                         if (var == 0) {
-//                            // 세션 테이블에 유저 저장
+//                            // 세션 테이블에 유저 추가
 //                            dbHelper.MakeSession(username);
 
                             // 메인 화면으로 넘어가기
                             Intent intent1 = new Intent(this, MainActivity.class);
+                            intent1.putExtra("username",username);
                             startActivity(intent1);
                             finish();
-                            break;
                         }
                         // 로그인 실패한 경우
                         else {
