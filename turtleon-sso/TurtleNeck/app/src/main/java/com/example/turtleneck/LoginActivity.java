@@ -26,7 +26,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button LoginBtn;
     private Button GoSignBtn;
     private EditText eName;
-    //private EditText eEmail;
     private EditText ePW;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // 로그인 정보 가져오기
         eName = (EditText) findViewById(R.id.Name);
-        //eEmail = (EditText) findViewById(R.id.Email);
         ePW = (EditText) findViewById(R.id.PW);
-
     }
 
     // 클릭시 이벤트 설정
@@ -60,60 +57,84 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.LoginBtn: {
                 final String username = eName.getText().toString().trim();
                 final String password = ePW.getText().toString().trim();
-                //final String emailadress = eEmail.getText().toString().trim();
 
                 if(!username.isEmpty()) {
                     if(!username.isEmpty()) {
-                        // 네트워크 빌드
-                        Retrofit retrofit = new Retrofit.Builder()
-                                .baseUrl(DjangoApi.DJANGO_SITE)
-                                .addConverterFactory(GsonConverterFactory.create())
-                                .build();
 
-                        final DjangoApi postApi = retrofit.create(DjangoApi.class);
+                        // 내장디비를 이용한 로그인 기능 구현
+                        DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
 
-                        // multipart 값 정리
-                        RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
-                        RequestBody requestPassword = RequestBody.create(MediaType.parse("multipart/data"), password);
-                        //RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
+                        int var;
+                        var = dbHelper.GetLogin(username, password);
 
-                        //Call<ResponseBody> post_logincall = postApi.post_login(requestUsername,requestPassword,requestEmail);
+                        // 로그인 성공한 경우
+                        if (var == 0) {
+//                            // 세션 테이블에 유저 저장
+//                            dbHelper.MakeSession(username);
 
-                        // 로그인 정보 전송 > 로그인 요청
-                        Call<ResponseBody> post_logincall = postApi.post_login(requestUsername,requestPassword);
-                        post_logincall.enqueue(new Callback<ResponseBody>() {
-                            @Override
-                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                Log.d("로그인 정보 전송 성공",""+username+"/"+password);
+                            // 메인 화면으로 넘어가기
+                            Intent intent1 = new Intent(this, MainActivity.class);
+                            startActivity(intent1);
+                            finish();
+                            break;
+                        }
+                        // 로그인 실패한 경우
+                        else {
+                            Toast.makeText(getApplicationContext(),"아이디와 비밀 번호를 확인해주세요!", Toast.LENGTH_LONG).show();
+                        }
 
-                                String confirm_username = "baba";
-                                //로그인 여부 확인하는 코드 추가 필요
-                                //GET?
-                                Call<ResponseBody> get_logincall = postApi.get_login(confirm_username);
-                                get_logincall.enqueue(new Callback<ResponseBody>() {
-                                    @Override
-                                    public void onResponse(@NonNull Call<ResponseBody> call,@NonNull Response<ResponseBody> response) {
-                                        if(response.isSuccessful()) {
-                                            if(response.body() != null) {
-                                                Log.d("성공~~~~~~~~~~",""+response.body().toString());
-                                            }
-                                        }
-                                        Log.d("NULL값 가져옴~~~~~~~~~~","");
-                                    }
 
-                                    @Override
-                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                        Log.d("실~~~~~~~~패!!!!!","");
-                                    }
-                                });
-                            }
 
-                            @Override
-                            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                Log.d("로그인 정보 전송 실패",""+username+"/"+password);
-                                Toast.makeText(getApplicationContext(),"아이디와 비밀 번호를 확인해주세요!", Toast.LENGTH_LONG).show();
-                            }
-                        });
+//                        // 네트워크 빌드
+//                        Retrofit retrofit = new Retrofit.Builder()
+//                                .baseUrl(DjangoApi.DJANGO_SITE)
+//                                .addConverterFactory(GsonConverterFactory.create())
+//                                .build();
+//
+//                        final DjangoApi postApi = retrofit.create(DjangoApi.class);
+//
+//                        // multipart 값 정리
+//                        RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
+//                        RequestBody requestPassword = RequestBody.create(MediaType.parse("multipart/data"), password);
+//                        //RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
+//
+//                        //Call<ResponseBody> post_logincall = postApi.post_login(requestUsername,requestPassword,requestEmail);
+//
+//                        // 로그인 정보 전송 > 로그인 요청
+//                        Call<ResponseBody> post_logincall = postApi.post_login(requestUsername,requestPassword);
+//                        post_logincall.enqueue(new Callback<ResponseBody>() {
+//                            @Override
+//                            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                                Log.d("로그인 정보 전송 성공",""+username+"/"+password);
+//
+//                                String confirm_username = "baba";
+//                                //로그인 여부 확인하는 코드 추가 필요
+//                                //GET?
+//                                Call<ResponseBody> get_logincall = postApi.get_login(confirm_username);
+//                                get_logincall.enqueue(new Callback<ResponseBody>() {
+//                                    @Override
+//                                    public void onResponse(@NonNull Call<ResponseBody> call,@NonNull Response<ResponseBody> response) {
+//                                        if(response.isSuccessful()) {
+//                                            if(response.body() != null) {
+//                                                Log.d("성공~~~~~~~~~~",""+response.body().toString());
+//                                            }
+//                                        }
+//                                        Log.d("NULL값 가져옴~~~~~~~~~~","");
+//                                    }
+//
+//                                    @Override
+//                                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                                        Log.d("실~~~~~~~~패!!!!!","");
+//                                    }
+//                                });
+//                            }
+//
+//                            @Override
+//                            public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                                Log.d("로그인 정보 전송 실패",""+username+"/"+password);
+//                                Toast.makeText(getApplicationContext(),"아이디와 비밀 번호를 확인해주세요!", Toast.LENGTH_LONG).show();
+//                            }
+//                        });
 
 //                        String confirm_username = "baba";
 //                        //로그인 여부 확인하는 코드 추가 필요
@@ -148,12 +169,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                            }
 //                        });
 
-
-                        // 메인 화면으로 이동
-                        Intent intent1 = new Intent(this, MainActivity.class);
-                        startActivity(intent1);
-                        finish();
-                        break;
+//                        // 메인 화면으로 이동
+//                        Intent intent1 = new Intent(this, MainActivity.class);
+//                        startActivity(intent1);
+//                        finish();
+//                        break;
                     } else {
                         Toast.makeText(getApplicationContext(),"비밀 번호를 입력해주세요!", Toast.LENGTH_LONG).show();
                     }

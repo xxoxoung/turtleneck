@@ -5,20 +5,26 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    // 아이콘을 보여주기 위한 이미지뷰
     ImageView youtubeButton;
     ImageView newsButton;
+
+    // 테이블에 있는 모든 데이터 출력하기 위한 뷰
+    // 좀 게시글의 형태로 수정 필요
+    TextView result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -37,6 +42,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         youtubeButton = (ImageView) findViewById(R.id.youtubeButton);
         newsButton = (ImageView) findViewById(R.id.newsButton);
+        result = (TextView) findViewById(R.id.result);
+
+        // 내장 디비 연결
+        DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
+        result.setText(dbHelper.GetResultBoard());
     }
 
     @Override
@@ -121,5 +131,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 //        Intent intent2 = new Intent(this, NewsActivity.class);
 //        startActivity(intent2);
+    }
+
+    // BoardAcitivity 로 이동
+    public void GoBoard (View view) {
+        Intent intent1 = new Intent(this, BoardActivity.class);
+        startActivity(intent1);
     }
 }

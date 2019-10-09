@@ -1,6 +1,7 @@
 package com.example.turtleneck;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -86,34 +87,40 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
                     if (isValidPassword(password1, password2)) {
                         if (!emailadress.isEmpty() && !password1.isEmpty() && !username.isEmpty() && !password2.isEmpty()) {
 
-                            // 네트워크 빌드
-                            Retrofit retrofit = new Retrofit.Builder()
-                                    .baseUrl(DjangoApi.DJANGO_SITE)
-                                    .addConverterFactory(GsonConverterFactory.create())
-                                    .build();
+                            // 내장 디비 이용한 회원가입 구현
+                            // 내장 디비 연결
+                            DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
+                            dbHelper.InsertSign(username, password1, emailadress);
 
-                            DjangoApi postApi = retrofit.create(DjangoApi.class);
 
-                            // 값 정리
-                            RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
-                            RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
-                            RequestBody requestPassword1 = RequestBody.create(MediaType.parse("multipart/data"), password1);
-                            RequestBody requestPassword2 = RequestBody.create(MediaType.parse("multipart/data"), password2);
-
-                            Call<ResponseBody> call = postApi.post_signup(requestUsername,requestEmail,requestPassword1,requestPassword2);
-
-                            call.enqueue(new Callback<ResponseBody>() {
-                                @Override
-                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                                    Log.d("회원가입 정보 전송 성공",""+username+"/"+password1+"/"+password2+"/"+emailadress);
-                                }
-
-                                @Override
-                                public void onFailure(Call<ResponseBody> call, Throwable t) {
-                                    Log.i("GGG", "실패 메시지 : " + t.getMessage());
-                                    Log.i("GGG", "요청 메시지 : " + call.request());
-                                }
-                            });
+//                            // 네트워크 빌드
+//                            Retrofit retrofit = new Retrofit.Builder()
+//                                    .baseUrl(DjangoApi.DJANGO_SITE)
+//                                    .addConverterFactory(GsonConverterFactory.create())
+//                                    .build();
+//
+//                            DjangoApi postApi = retrofit.create(DjangoApi.class);
+//
+//                            // 값 정리
+//                            RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
+//                            RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
+//                            RequestBody requestPassword1 = RequestBody.create(MediaType.parse("multipart/data"), password1);
+//                            RequestBody requestPassword2 = RequestBody.create(MediaType.parse("multipart/data"), password2);
+//
+//                            Call<ResponseBody> call = postApi.post_signup(requestUsername,requestEmail,requestPassword1,requestPassword2);
+//
+//                            call.enqueue(new Callback<ResponseBody>() {
+//                                @Override
+//                                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                                    Log.d("회원가입 정보 전송 성공",""+username+"/"+password1+"/"+password2+"/"+emailadress);
+//                                }
+//
+//                                @Override
+//                                public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                                    Log.i("GGG", "실패 메시지 : " + t.getMessage());
+//                                    Log.i("GGG", "요청 메시지 : " + call.request());
+//                                }
+//                            });
 
                             Intent intent1 = new Intent(this, LoginActivity.class);
                             startActivity(intent1);
