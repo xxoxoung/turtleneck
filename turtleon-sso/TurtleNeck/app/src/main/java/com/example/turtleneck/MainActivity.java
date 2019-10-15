@@ -111,10 +111,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_StartDia) {
             // 진단 시작 화면으로 이동
             Intent intent1 = new Intent(this, DiagActivity.class);
+            intent1.putExtra("username",username);
             startActivity(intent1);
         } else if (id == R.id.nav_ConfirmDia) {
             // 진단 확인 화면으로 이동
             Intent intent2 = new Intent(this, ConfirmActivity.class);
+            intent2.putExtra("username",username);
             startActivity(intent2);
         } else if (id == R.id.nav_Board) {
             // 게시글 관리 화면으로 이동
@@ -123,6 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_Setting) {
             // 설정 화면으로 이동
             Intent intent5 = new Intent(this, SettingActivity.class);
+            intent5.putExtra("username",username);
             startActivity(intent5);
         } else if (id == R.id.nav_FAQ) {
             // 고객센터 화면으로 이동

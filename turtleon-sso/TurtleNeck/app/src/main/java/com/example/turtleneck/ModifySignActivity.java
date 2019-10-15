@@ -3,7 +3,6 @@ package com.example.turtleneck;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -26,11 +25,14 @@ public class ModifySignActivity extends AppCompatActivity {
     private EditText ePW;
     private EditText eEmail;
 
+    public String username;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifysign);
 
-
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
     }
 
     // 회원정보 수정하기 버튼 누르면
@@ -49,37 +51,41 @@ public class ModifySignActivity extends AppCompatActivity {
             if (isValidPassword(password)) {
                 if (!emailadress.isEmpty() && !password.isEmpty()) {
 
-                    // 네트워크 빌드
-                    Retrofit retrofit = new Retrofit.Builder()
-                            .baseUrl(DjangoApi.DJANGO_SITE)
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build();
+                    DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
+                    dbHelper.ModifyUser(username, password,emailadress);
 
-                    DjangoApi postApi = retrofit.create(DjangoApi.class);
-
-                    // 값 정리
-                    RequestBody requestPassword = RequestBody.create(MediaType.parse("multipart/data"), password);
-                    RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
-                    //RequestBody requestㅕUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
-
-                    Call<ResponseBody> call = postApi.post_modifysign(requestPassword, requestEmail);
-
-                    call.enqueue(new Callback<ResponseBody>() {
-                        @Override
-                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                            Log.d("회원가입 정보 전송 성공", "" + password + "/" + emailadress);
-                        }
-
-                        @Override
-                        public void onFailure(Call<ResponseBody> call, Throwable t) {
-                            Log.i("GGG", "실패 메시지 : " + t.getMessage());
-                            Log.i("GGG", "요청 메시지 : " + call.request());
-                        }
-                    });
+//                    // 네트워크 빌드
+//                    Retrofit retrofit = new Retrofit.Builder()
+//                            .baseUrl(DjangoApi.DJANGO_SITE)
+//                            .addConverterFactory(GsonConverterFactory.create())
+//                            .build();
+//
+//                    DjangoApi postApi = retrofit.create(DjangoApi.class);
+//
+//                    // 값 정리
+//                    RequestBody requestPassword = RequestBody.create(MediaType.parse("multipart/data"), password);
+//                    RequestBody requestEmail = RequestBody.create(MediaType.parse("multipart/data"), emailadress);
+//                    //RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
+//
+//                    Call<ResponseBody> call = postApi.post_modifysign(requestPassword, requestEmail);
+//
+//                    call.enqueue(new Callback<ResponseBody>() {
+//                        @Override
+//                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                            Log.d("회원가입 정보 전송 성공", "" + password + "/" + emailadress);
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+//                            Log.i("GGG", "실패 메시지 : " + t.getMessage());
+//                            Log.i("GGG", "요청 메시지 : " + call.request());
+//                        }
+//                    });
                 }
 
                 // 메인 페이지로 이동
                 Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("username",username);
                 startActivity(intent);
                 finish();
             }

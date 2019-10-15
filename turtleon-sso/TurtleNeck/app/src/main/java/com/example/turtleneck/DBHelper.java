@@ -143,10 +143,23 @@ public class DBHelper extends SQLiteOpenHelper {
     public void InsertBoard(String date, String title, String content) {
         // 읽고 쓰기가 가능하게 DB 열기
         SQLiteDatabase db = getWritableDatabase();
+
         // DB에 입력한 값으로 행 추가
         db.execSQL("INSERT INTO BOARD VALUES(null,'" + date + "','" + title + "','" + content + "');");
         db.close();
     }
+
+    // ModifySignActivity
+    // 회원가입 정보 수정
+    public void ModifyUser(String u, String p, String e) {
+        // 읽고 쓰기가 가능하게 DB 열기
+        SQLiteDatabase db = getWritableDatabase();
+
+        // 수정할 회원정보 입력
+        db.execSQL("UPDATE USER SET password='" + p + "',email='" + e + "' WHERE username= '"+u +"';");
+    }
+
+    //username TEXT, password TEXT, email TEXT
 
 //    public void update(String item, int price) {
 //        SQLiteDatabase db = getWritableDatabase();

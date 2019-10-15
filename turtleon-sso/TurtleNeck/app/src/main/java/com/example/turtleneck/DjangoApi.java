@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface DjangoApi {
 
-    String DJANGO_SITE = "http://69af2f01.ngrok.io/";
+    String DJANGO_SITE = "http://92f6de97.ngrok.io/";
     //내 authtoken 주소/ngrok 끄면 다시 켜서 주소 바꿔줘야함..
 
     // SignActivity
@@ -62,8 +62,7 @@ public interface DjangoApi {
     // Call<ResponseBody> post_confirm();
 
     // GetPhotoActivity uploadImage()
-    // 사진, 좌표, 키, 성별, 진단번호 변수(count), 알고리즘 변수(confirm)
-    // 유저네임
+    // 사진, 좌표, 키, 성별, 진단번호 변수(count), 알고리즘 변수(confirm), username
     @Multipart
     @POST("image/upload/")
     Call<ResponseBody> uploadFile(

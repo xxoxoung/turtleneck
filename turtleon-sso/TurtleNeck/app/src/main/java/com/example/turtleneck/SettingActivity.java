@@ -10,9 +10,14 @@ public class SettingActivity extends AppCompatActivity {
     Button mdButton;
     Button osButton;
 
+    public String username;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
 
         mdButton = (Button) findViewById(R.id.ModiSignBtn);
         osButton = (Button) findViewById(R.id.OutBtn);
@@ -21,6 +26,7 @@ public class SettingActivity extends AppCompatActivity {
     // ModifySignActivity 로 이동
     public void ModiSign (View view) {
         Intent intent1 = new Intent(this, ModifySignActivity.class);
+        intent1.putExtra("username",username);
         startActivity(intent1);
     }
 

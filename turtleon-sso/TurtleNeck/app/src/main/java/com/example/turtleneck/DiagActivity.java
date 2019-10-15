@@ -34,11 +34,16 @@ public class DiagActivity extends AppCompatActivity implements View.OnClickListe
 
     public String tall;
     public String gender;
+    public String username;
 
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diag);
+
+       Intent intent = getIntent();
+       username = intent.getStringExtra("username");
+
 
         // 진단 시작 버튼에 클릭 이벤트 연결
         findViewById(R.id.StDgBtn).setOnClickListener(this);
@@ -80,7 +85,7 @@ public class DiagActivity extends AppCompatActivity implements View.OnClickListe
             // tall,gender정보를 GetPhotoActivity로 전송
             intent.putExtra("tall",tall);
             intent.putExtra("gender",gender);
-
+            intent.putExtra("username",username);
             startActivity(intent);
             finish();
         } else {

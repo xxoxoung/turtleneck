@@ -15,7 +15,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -33,9 +32,6 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -63,6 +59,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
 
     public String tall;
     public String gender;
+    public String username;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +69,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         Intent intent = getIntent();
         tall = intent.getStringExtra("tall");
         gender = intent.getStringExtra("gender");
+        username = intent.getStringExtra("username");
 
         // 레이아웃 연결
         imageView = findViewById(R.id.DiaPht);  // 이미지뷰
@@ -260,7 +258,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         RequestBody requestPointY = RequestBody.create(MediaType.parse("multipart/data"), point_y);
 
         // 로그인 + 세션 유지 성공하면 username도 같이 보내기 (진단 확인에 쓰일 예정)
-        //RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
+       // RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
 
         // 알고리즘을 위한 변수 (사진 이름 인식, 알고리즘 실행 변수)
         RequestBody requestCount = RequestBody.create(MediaType.parse("multipart/data"), count);
