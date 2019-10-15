@@ -71,7 +71,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         // DiagActivity 에서 tall, gender 받아오기
         Intent intent = getIntent();
         tall = intent.getStringExtra("tall");
-        gender = intent. getStringExtra("gender");
+        gender = intent.getStringExtra("gender");
 
         // 레이아웃 연결
         imageView = findViewById(R.id.DiaPht);  // 이미지뷰
@@ -86,8 +86,8 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
 
         // 6.0 마쉬멜로우 이상일 경우에는 권한 체크 후 권한 요청
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED )
-            { } else {
+            if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
             }
         }
@@ -97,32 +97,34 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED ) { }
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+        }
     }
 
     // 클릭 이벤트리스너 처리
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.GoCam: {
                 // 카메라 앱을 여는 소스
                 dispatchTakePictureIntent();
                 break;
             }
 
-            case R.id.GoServer:{
+            case R.id.GoServer: {
                 //서버로 보내는 함수 호출
                 uploadImage();
 
-                // 이미지 서버로 전송 후 메인화면으로 화면 넘기기
-                Intent intent1 = new Intent(this, GraphActivity.class);
+                // 이미지 서버로 전송 후 로딩 화면으로 넘기기
+                // 이미지 전송 >> 로딩 화면 >> 서버 알고리즘 실행 후 >> 그래프 화면
+                Intent intent1 = new Intent(this, DelayActivity.class);
                 startActivity(intent1);
                 finish();
                 break;
             }
 
             // 도움말 페이지 열기
-            case R.id.HelpImg:{
+            case R.id.HelpImg: {
                 Intent intent2 = new Intent(this, HelpPhotoActivity.class);
                 startActivity(intent2);
                 break;
@@ -180,34 +182,34 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         try {
-            switch(requestCode) {
-                case REQUEST_TAKE_PHOTO : {
-                    if(resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_TAKE_PHOTO: {
+                    if (resultCode == RESULT_OK) {
                         File file = new File(mCurrentPhotoPath);
                         Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.fromFile(file));
 
-                        if(bitmap != null) {
+                        if (bitmap != null) {
                             ExifInterface ei = new ExifInterface(mCurrentPhotoPath);
                             int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED);
 
                             // 사진 회전하기
                             Bitmap rotatedBitmap = null;
                             switch (orientation) {
-                                case ExifInterface.ORIENTATION_ROTATE_90 : {
+                                case ExifInterface.ORIENTATION_ROTATE_90: {
                                     rotatedBitmap = rotateImage(bitmap, 90);
                                     break;
                                 }
-                                case ExifInterface.ORIENTATION_ROTATE_180 : {
+                                case ExifInterface.ORIENTATION_ROTATE_180: {
                                     rotatedBitmap = rotateImage(bitmap, 180);
                                     break;
                                 }
-                                case ExifInterface.ORIENTATION_ROTATE_270 : {
+                                case ExifInterface.ORIENTATION_ROTATE_270: {
                                     rotatedBitmap = rotateImage(bitmap, 270);
                                     break;
                                 }
-                                case ExifInterface.ORIENTATION_NORMAL :
-                                    default:
-                                        rotatedBitmap = bitmap;
+                                case ExifInterface.ORIENTATION_NORMAL:
+                                default:
+                                    rotatedBitmap = bitmap;
                             }
 
                             // 이미지뷰에 사진 띄우기
@@ -216,8 +218,8 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
                             // 진단에 사용할 좌표값
                             height = rotatedBitmap.getHeight();
                             width = rotatedBitmap.getWidth();
-                            height = ((height*2)/3)/(4.2);
-                            width = ((width*2)/3)/(4.2);
+                            height = ((height * 2) / 3) / (4.2);
+                            width = ((width * 2) / 3) / (4.2);
                         }
                     }
                     break;
@@ -234,7 +236,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         matrix.postRotate(angle);
         return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
     }
-    
+
     //이미지 서버로 전송하는 함수
     public void uploadImage() {
         File imageFile = new File(mCurrentPhotoPath);
@@ -271,12 +273,13 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         MultipartBody.Part multiPartBody = MultipartBody.Part.createFormData("model_pic", imageFile.getName(), requestImage);
 
         // 정보를 하나로 묶어서 서버로 전송
-        Call<ResponseBody> call = postApi.uploadFile(multiPartBody,requestPointX,requestPointY,requestTall,requestGender,requestCount,requestConfirm);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<ResponseBody> postcall = postApi.uploadFile(multiPartBody, requestPointX, requestPointY, requestTall, requestGender, requestCount, requestConfirm);
+        postcall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 

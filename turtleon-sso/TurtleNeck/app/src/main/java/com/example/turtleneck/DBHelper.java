@@ -1,13 +1,12 @@
 package com.example.turtleneck;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
-import static android.support.v4.content.ContextCompat.startActivity;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -105,7 +104,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public String GetResultBoard() {
         // 읽기가 가능하게 DB 열기
         SQLiteDatabase db = getReadableDatabase();
-        String result = "";
+        String result = "\n";
 
         // DB에 있는 데이터를 쉽게 처리하기 위해 Cursor를 사용하여 테이블에 있는 모든 데이터 출력
         Cursor cursor = db.rawQuery("SELECT * FROM BOARD", null);
@@ -114,7 +113,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     + "번 게시글" + "\n"
                     + "작성 날짜 : " + cursor.getString(1) + "\n"
                     + "제목 : " + cursor.getString(2) +"\n"
-                    + "내용 : " + cursor.getString(3) + "\n";
+                    + "내용 : " + cursor.getString(3) + "\n\n";
         }
         db.close();
         return result;
