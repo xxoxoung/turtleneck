@@ -51,7 +51,7 @@ public class ModifySignActivity extends AppCompatActivity {
             if (isValidPassword(password)) {
                 if (!emailadress.isEmpty() && !password.isEmpty()) {
 
-                    DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
+                    DBHelper dbHelper = new DBHelper(getApplicationContext(), "A.db", null, 1);
                     dbHelper.ModifyUser(username, password,emailadress);
 
 //                    // 네트워크 빌드

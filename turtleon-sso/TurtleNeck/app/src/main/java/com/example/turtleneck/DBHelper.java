@@ -5,11 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class DBHelper extends SQLiteOpenHelper {
-
     // DBHelper 생성자로 관리할 DB 이름과 버전 정보를 받음
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -33,9 +29,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // 테이블 이름 BOARD
         // 기본키 : 게시글 번호 _id (자동으로 숫자 증가)
-        // 게시글 작성 날짜 date
+        // 게시글 작성 날짜 date 게시글 작성자 user
         // 게시글 제목 title     게시글 내용 content
-        db.execSQL("CREATE TABLE BOARD (_id_b INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, title TEXT, content TEXT);");
+        db.execSQL("CREATE TABLE BOARD (_id_b INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, user TEXT, title TEXT, content TEXT);");
     }
 
     // DB 업그레이드를 위해 버전이 변경될 때 호출되는 함수
@@ -59,7 +55,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 return 1;
             }
         }
-
         // DB에 입력한 값으로 행 추가
         db.execSQL("INSERT INTO USER VALUES(null,'" + username + "','" + password + "','" + email + "');");
         db.close();
@@ -80,7 +75,7 @@ public class DBHelper extends SQLiteOpenHelper {
             username = cursor.getString(1);
             password = cursor.getString(2);
 
-            if (password.equals(p)&&username.equals(u)) {
+            if (password.equals(p) && username.equals(u)) {
                 db.close();
                 return 0;
             }
@@ -111,9 +106,9 @@ public class DBHelper extends SQLiteOpenHelper {
         while (cursor.moveToNext()) {
             result += cursor.getString(0)
                     + "번 게시글" + "\n"
-                    + "작성 날짜 : " + cursor.getString(1) + "\n"
-                    + "제목 : " + cursor.getString(2) +"\n"
-                    + "내용 : " + cursor.getString(3) + "\n\n";
+                    + "작성자 : " + cursor.getString(2) + "     작성날짜 : " + cursor.getString(1) + "\n"
+                    + "제목 : " + cursor.getString(3) + "\n"
+                    + "내용 : " + cursor.getString(4) + "\n\n";
         }
         db.close();
         return result;
@@ -140,12 +135,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // BoardActivity
     // 게시판 글쓰기
-    public void InsertBoard(String date, String title, String content) {
+    public void InsertBoard(String date, String user, String title, String content) {
         // 읽고 쓰기가 가능하게 DB 열기
         SQLiteDatabase db = getWritableDatabase();
 
         // DB에 입력한 값으로 행 추가
-        db.execSQL("INSERT INTO BOARD VALUES(null,'" + date + "','" + title + "','" + content + "');");
+        db.execSQL("INSERT INTO BOARD VALUES(null,'" + date + "','" + user + "','" + title + "','" + content + "');");
         db.close();
     }
 
@@ -156,8 +151,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
 
         // 수정할 회원정보 입력
-        db.execSQL("UPDATE USER SET password='" + p + "',email='" + e + "' WHERE username= '"+u +"';");
-
+        db.execSQL("UPDATE USER SET password='" + p + "',email='" + e + "' WHERE username= '" + u + "';");
         db.close();
     }
 
@@ -165,9 +159,11 @@ public class DBHelper extends SQLiteOpenHelper {
     // 회원 탈퇴하기
     public void SignoutUser(String u) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM USER WHERE username='"+u+"';");
+        db.execSQL("DELETE FROM USER WHERE username='" + u + "';");
         db.close();
     }
+}
+
 //    public int SignoutUser(String u, String p, String e) {
 //        // 디비를 읽고 쓰기가 가능하게 열기
 //        SQLiteDatabase db = getWritableDatabase();
@@ -196,8 +192,6 @@ public class DBHelper extends SQLiteOpenHelper {
 //        return 1;
 //    }
 
-    //username TEXT, password TEXT, email TEXT
-
 //    public void update(String item, int price) {
 //        SQLiteDatabase db = getWritableDatabase();
 //        // 입력한 항목과 일치하는 행의 가격 정보 수정
@@ -212,4 +206,3 @@ public class DBHelper extends SQLiteOpenHelper {
 //        db.close();
 //    }
 
-}

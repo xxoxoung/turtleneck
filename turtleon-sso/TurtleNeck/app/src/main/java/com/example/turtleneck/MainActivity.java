@@ -1,29 +1,19 @@
 package com.example.turtleneck;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -64,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tEmail = (TextView) header.findViewById(R.id.textEmailaddress);
 
         // 내장 디비 연결
-        DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
+        DBHelper dbHelper = new DBHelper(getApplicationContext(), "A.db", null, 1);
         result.setText(dbHelper.GetResultBoard());
 
         // LoginActivity로부터 유저이름 받아오기
@@ -121,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_Board) {
             // 게시글 관리 화면으로 이동
             Intent intent4 = new Intent(this, BoardActivity.class);
+            intent4.putExtra("username",username);
             startActivity(intent4);
         } else if (id == R.id.nav_Setting) {
             // 설정 화면으로 이동
@@ -168,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // BoardAcitivity 로 이동
     public void GoBoard (View view) {
         Intent intent1 = new Intent(this, BoardActivity.class);
+        intent1.putExtra("username",username);
         startActivity(intent1);
     }
 }

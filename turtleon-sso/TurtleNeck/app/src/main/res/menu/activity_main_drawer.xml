@@ -17,7 +17,7 @@
         <item
             android:id="@+id/nav_Board"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="게시글 관리" />
+            android:title="게시글 쓰기" />
         <item
             android:id="@+id/nav_Setting"
             android:icon="@drawable/ic_menu_manage"

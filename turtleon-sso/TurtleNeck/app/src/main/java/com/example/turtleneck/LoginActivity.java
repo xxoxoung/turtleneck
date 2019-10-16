@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if(!username.isEmpty()) {
 
                         // 내장디비를 이용한 로그인 기능 구현
-                        DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
+                        DBHelper dbHelper = new DBHelper(getApplicationContext(), "A.db", null, 1);
 
                         int var;
                         var = dbHelper.GetLogin(username, password);

@@ -12,15 +12,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BoardActivity extends AppCompatActivity{
+
+    public String username;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
 
-        final DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
+        final DBHelper dbHelper = new DBHelper(getApplicationContext(), "A.db", null, 1);
 
         final EditText etDate = (EditText) findViewById(R.id.dateText);
         final EditText etTitle = (EditText) findViewById(R.id.titleText);
         final EditText etContent = (EditText) findViewById(R.id.contentText);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
 
         // 날짜는 현재 날짜로 고정
         // 현재 시간 구하기
@@ -39,7 +45,7 @@ public class BoardActivity extends AppCompatActivity{
                 String title = etTitle.getText().toString();
                 String content = etContent.getText().toString();
 
-                dbHelper.InsertBoard(date, title, content);
+                dbHelper.InsertBoard(date, username, title, content);
 
                 Intent intent1 = new Intent(BoardActivity.this, MainActivity.class);
                 startActivity(intent1);

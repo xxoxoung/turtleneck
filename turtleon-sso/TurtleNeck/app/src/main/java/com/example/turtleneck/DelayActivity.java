@@ -42,7 +42,7 @@ public class DelayActivity extends AppCompatActivity {
 //        });
 
 
-        // 5초뒤 화면전환
+        // 10초뒤 화면전환
         Handler handler = new Handler() {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
@@ -51,6 +51,6 @@ public class DelayActivity extends AppCompatActivity {
                 finish();
             }
         };
-        handler.sendEmptyMessageDelayed(0,1000);
+        handler.sendEmptyMessageDelayed(0,10000);
     }
 }

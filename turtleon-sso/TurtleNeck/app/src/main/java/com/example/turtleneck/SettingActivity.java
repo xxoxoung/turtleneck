@@ -46,7 +46,7 @@ public class SettingActivity extends AppCompatActivity {
         builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null,1);
+                DBHelper dbHelper = new DBHelper(getApplicationContext(), "A.db", null,1);
                 dbHelper.SignoutUser(username);
 
                 Intent intent2 = new Intent(SettingActivity.this, StartActivity.class);

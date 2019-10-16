@@ -74,10 +74,6 @@ public interface DjangoApi {
             @Part("count") RequestBody count,
             @Part("confirm") RequestBody confirm);
 
-//    // 서버 함수 호출을 위한 함수
-//    @GET("test/")
-//    Call<ResponseBody> callFunction();
-
     // ModifySignActivity
     // 회원가입 정보 수정
     // 로그인 구현 후 username 추가 필요

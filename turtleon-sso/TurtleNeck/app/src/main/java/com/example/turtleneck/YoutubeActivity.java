@@ -26,19 +26,6 @@ public class YoutubeActivity extends YouTubeBaseActivity implements YouTubePlaye
         return (YouTubePlayerView) findViewById(R.id.youtubeView1);
     }
 
-    /**
-     * 플레이어가 초기화될 때 호출됩니다.
-     * 매개변수
-     *
-     * provider YouTubePlayer를 초기화화는 데 사용된 제공자입니다.
-     * player 제공자에서 동영상 재생을 제어하는 데 사용할 수 있는 YouTubePlayer입니다
-     * wasRestored
-     *    YouTubePlayerView 또는 YouTubePlayerFragment가 상태를 복원하는 과정의 일부로서
-     *    플레이어가 이전에 저장된 상태에서 복원되었는지 여부입니다.
-     *    true는 일반적으로 사용자가 재생이 다시 시작될 거라고 예상하는 지점에서 재생을 다시 시작하고
-     *    새 동영상이 로드되지 않아야 함을 나타냅니다.
-     */
-
     // 비디오 URL 추가되면 추가하기!!!
     // 2019.10.06 기준 요소 11개
     String videoString[] = {"YPYPvcRE4m8",

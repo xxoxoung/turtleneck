@@ -89,7 +89,7 @@ public class SignActivity extends AppCompatActivity implements View.OnClickListe
 
                             // 내장 디비 이용한 회원가입 구현
                             // 내장 디비 연결
-                            DBHelper dbHelper = new DBHelper(getApplicationContext(), "AAA.db", null, 1);
+                            DBHelper dbHelper = new DBHelper(getApplicationContext(), "A.db", null, 1);
                             int var;
                             var = dbHelper.InsertSign(username, password1, emailadress);
 
