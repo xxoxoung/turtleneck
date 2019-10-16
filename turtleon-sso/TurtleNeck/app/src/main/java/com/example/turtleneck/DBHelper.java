@@ -157,7 +157,44 @@ public class DBHelper extends SQLiteOpenHelper {
 
         // 수정할 회원정보 입력
         db.execSQL("UPDATE USER SET password='" + p + "',email='" + e + "' WHERE username= '"+u +"';");
+
+        db.close();
     }
+
+    // SignoutActivity
+    // 회원 탈퇴하기
+    public void SignoutUser(String u) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM USER WHERE username='"+u+"';");
+        db.close();
+    }
+//    public int SignoutUser(String u, String p, String e) {
+//        // 디비를 읽고 쓰기가 가능하게 열기
+//        SQLiteDatabase db = getWritableDatabase();
+//
+//        String username = "";
+//        String password = "";
+//        String email = "";
+//
+//        // 입력한 회원 정보 확인
+//        Cursor cursor = db.rawQuery("SELECT * FROM USER", null);
+//        while (cursor.moveToNext()) {
+//            username = cursor.getString(1);
+//            password = cursor.getString(2);
+//            email = cursor.getString(3);
+//
+//            // 회원이 맞으면
+//            if (password.equals(p)&&username.equals(u)&&email.equals(e)) {
+//                // 테이블에서 해당 행 삭제 진행 >> 탈퇴하기
+//                db.execSQL("DELETE FROM USER WHERE username='"+u+"';");
+//                db.close();
+//                return 0;
+//            }
+//        }
+//        // 테이블에 회원 정보가 없는 경우
+//        db.close();
+//        return 1;
+//    }
 
     //username TEXT, password TEXT, email TEXT
 
