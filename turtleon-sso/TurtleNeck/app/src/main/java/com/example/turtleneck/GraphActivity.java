@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import org.achartengine.ChartFactory;
@@ -41,7 +40,7 @@ public class GraphActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
-        //findViewById(R.id.GotoMainBtn).setOnClickListener(this);
+        findViewById(R.id.GotoMainBtn).setOnClickListener(this);
 
         drawChart();
     }
@@ -50,7 +49,7 @@ public class GraphActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-        //finish();
+        finish();
     }
 
     // 막대 그래프 그리기

@@ -75,6 +75,13 @@ public interface DjangoApi {
             @Part("confirm") RequestBody confirm,
             @Part("username") RequestBody username);
 
+    // GraphActivity
+    // 진단값 가져오기
+    // 서버 연결 후 수정하기
+    @GET("where/the/Diag/value/exist/")
+    Call<ResponseBody> GetDiagValue(
+            @Path("username") String username);
+
     // ModifySignActivity
     // 회원가입 정보 수정
     // 로그인 구현 후 username 추가 필요

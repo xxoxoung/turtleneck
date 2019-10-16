@@ -133,8 +133,10 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     // 카메라 실행
     private void dispatchTakePictureIntent() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
         // 인텐트 확인
         if (intent.resolveActivity(getPackageManager()) != null) {
+
             // 파일 만들고 초기화
             File photoFile = null;
             try {
@@ -142,6 +144,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
             } catch (IOException ex) {
                 // 에러난 경우
             }
+
             // 파일이 정상적으로 만들어지면 계속
             if (photoFile != null) {
                 Uri photoURI = FileProvider.getUriForFile(this,
@@ -159,9 +162,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         // 파일 이름 만들기
         // 이름 변경 > 유저이름 cnt++
         cnt++;
-        //String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
-        //String imageFileName = timeStamp + "_" + cnt;
         String imageFileName = username + cnt;
 
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
@@ -170,6 +171,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
+
         // 파일 저장
         mCurrentPhotoPath = image.getAbsolutePath();
         return image;
@@ -257,16 +259,16 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         RequestBody requestPointX = RequestBody.create(MediaType.parse("multipart/data"), point_x);
         RequestBody requestPointY = RequestBody.create(MediaType.parse("multipart/data"), point_y);
 
-        // 로그인 + 세션 유지 성공하면 username도 같이 보내기 (진단 확인에 쓰일 예정)
-        RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
+        // 사용자의 진단 정보
+        RequestBody requestTall = RequestBody.create(MediaType.parse("multipart/data"), tall);
+        RequestBody requestGender = RequestBody.create(MediaType.parse("multipart/data"), gender);
 
         // 알고리즘을 위한 변수 (사진 이름 인식, 알고리즘 실행 변수)
         RequestBody requestCount = RequestBody.create(MediaType.parse("multipart/data"), count);
         RequestBody requestConfirm = RequestBody.create(MediaType.parse("multipart/data"), confirm);
 
-        // 사용자의 진단 정보
-        RequestBody requestTall = RequestBody.create(MediaType.parse("multipart/data"), tall);
-        RequestBody requestGender = RequestBody.create(MediaType.parse("multipart/data"), gender);
+        // username도 같이 보내기 (진단 확인에 쓰일 예정)
+        RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
 
         MultipartBody.Part multiPartBody = MultipartBody.Part.createFormData("model_pic", imageFile.getName(), requestImage);
 
@@ -275,12 +277,10 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         postcall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-
             }
         });
     }

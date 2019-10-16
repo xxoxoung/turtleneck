@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".GraphActivity">
@@ -35,22 +35,26 @@
         android:layout_height="fill_parent"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
+
         <LinearLayout
             android:id="@+id/chart_bar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_weight="1">
-        </LinearLayout>
+            android:layout_weight="1"
+            android:orientation="horizontal"></LinearLayout>
     </LinearLayout>
 
-    <!--// 수정중-->
-    <!--<Button-->
-        <!--android:id="@+id/GotoMainBtn"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="메인으로"-->
-        <!--tools:ignore="MissingConstraints" />-->
+    <Button
+        android:id="@+id/GotoMainBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="1"
+        android:text="메인으로 돌아가기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.828" />
 </android.support.constraint.ConstraintLayout>
