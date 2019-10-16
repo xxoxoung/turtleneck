@@ -159,10 +159,10 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         // 파일 이름 만들기
         // 이름 변경 > 유저이름 cnt++
         cnt++;
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        //String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
 
-        String imageFileName = timeStamp + "_" + cnt;
-        // String imageFileName = username + cnt;
+        //String imageFileName = timeStamp + "_" + cnt;
+        String imageFileName = username + cnt;
 
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
