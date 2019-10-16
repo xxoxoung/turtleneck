@@ -72,7 +72,8 @@ public interface DjangoApi {
             @Part("tall") RequestBody tall,
             @Part("gender") RequestBody gender,
             @Part("count") RequestBody count,
-            @Part("confirm") RequestBody confirm);
+            @Part("confirm") RequestBody confirm,
+            @Part("username") RequestBody username);
 
     // ModifySignActivity
     // 회원가입 정보 수정

@@ -258,7 +258,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         RequestBody requestPointY = RequestBody.create(MediaType.parse("multipart/data"), point_y);
 
         // 로그인 + 세션 유지 성공하면 username도 같이 보내기 (진단 확인에 쓰일 예정)
-       // RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
+        RequestBody requestUsername = RequestBody.create(MediaType.parse("multipart/data"), username);
 
         // 알고리즘을 위한 변수 (사진 이름 인식, 알고리즘 실행 변수)
         RequestBody requestCount = RequestBody.create(MediaType.parse("multipart/data"), count);
@@ -271,7 +271,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
         MultipartBody.Part multiPartBody = MultipartBody.Part.createFormData("model_pic", imageFile.getName(), requestImage);
 
         // 정보를 하나로 묶어서 서버로 전송
-        Call<ResponseBody> postcall = postApi.uploadFile(multiPartBody, requestPointX, requestPointY, requestTall, requestGender, requestCount, requestConfirm);
+        Call<ResponseBody> postcall = postApi.uploadFile(multiPartBody, requestPointX, requestPointY, requestTall, requestGender, requestCount, requestConfirm, requestUsername);
         postcall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
