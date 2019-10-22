@@ -16,8 +16,8 @@
             android:title="진단 확인" />
         <item
             android:id="@+id/nav_Board"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="게시글 쓰기" />
+            android:icon="@drawable/write"
+            android:title="게시글 관리" />
         <item
             android:id="@+id/nav_Setting"
             android:icon="@drawable/ic_menu_manage"

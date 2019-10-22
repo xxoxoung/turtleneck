@@ -35,21 +35,12 @@
             android:name=".MainActivity"
             android:label="굿바이 거북"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity android:name=".YoutubeActivity"></activity>
         <activity android:name=".NewsActivity"></activity>
 
-        <activity android:name=".DiagActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".DiagActivity"></activity>
         <activity android:name=".GetPhotoActivity"></activity>
         <activity android:name=".HelpPhotoActivity"></activity>
         <activity android:name=".DelayActivity"></activity>
@@ -58,6 +49,7 @@
         <activity android:name=".ConfirmActivity"></activity>
         <activity android:name=".ModifySignActivity"></activity>
         <activity android:name=".BoardActivity"></activity>
+        <activity android:name=".BoardManageActivity"></activity>
         <activity android:name=".SettingActivity"></activity>
         <activity android:name=".FAQActivity"></activity>
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <ImageView
+        android:id="@+id/gomain"
+        android:src="@drawable/main"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:padding="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:onClick="GoMain"
+        android:text="메인으로" />
+
+    <ListView
+        android:id="@+id/List_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#00000000">
+    </ListView>
+
+</LinearLayout>

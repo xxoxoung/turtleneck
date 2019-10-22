@@ -31,7 +31,7 @@ public class BoardActivity extends AppCompatActivity{
         long now = System.currentTimeMillis();
         Date date = new Date(now);
         // 출력될 포맷 설정
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM월 dd일 HH시 mm분");
         etDate.setText(simpleDateFormat.format(date));
 
         // DB에 데이터 추가
@@ -46,6 +46,7 @@ public class BoardActivity extends AppCompatActivity{
                 dbHelper.InsertBoard(date, username, title, content);
 
                 Intent intent1 = new Intent(BoardActivity.this, MainActivity.class);
+                intent1.putExtra("username",username);
                 startActivity(intent1);
                 finish();
             }

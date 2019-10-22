@@ -48,7 +48,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     double cnt = 0;
 
     // 서버에서 알고리즘을 돌리기 위한 변수
-    String confirm = "1";
+    String confirm = "1000";
 
     public double height;                             // 사진 세로 크기
     public double width;                              // 사진 가로 크기

@@ -115,6 +115,28 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // MainActivity
+    // 전체 게시글 목록 보기
+    public int Board(String[] number, String[] date, String[] user, String[] title, String[] content) {
+        // 읽기 가능하게 DB 열기
+        SQLiteDatabase db = getReadableDatabase();
+
+        int i = 0;
+
+        // 작성된 모든 게시글 가져오기
+        Cursor cursor = db.rawQuery("SELECT * FROM BOARD",null);
+        while(cursor.moveToNext()) {
+            number[i] = cursor.getString(0);
+            date[i] = cursor.getString(1);
+            user[i] = cursor.getString(2);
+            title[i] = cursor.getString(3);
+            content[i] = cursor.getString(4);
+            i++;
+        }
+        db.close();
+        return i;
+    }
+
+    // MainActivity
     // 헤더에 유저이름, 유저이메일 띄우기
     public String GetHeader(String u) {
         // 읽기가 가능하게 DB 열기
@@ -142,6 +164,27 @@ public class DBHelper extends SQLiteOpenHelper {
         // DB에 입력한 값으로 행 추가
         db.execSQL("INSERT INTO BOARD VALUES(null,'" + date + "','" + user + "','" + title + "','" + content + "');");
         db.close();
+    }
+
+    // BoardManageActivity
+    // 자신이 작성한 글 목록 보기
+    public int ManageBoard(String[] number, String user, String[] date, String[] title, String[] content) {
+        // 읽기 가능하게 DB 열기
+        SQLiteDatabase db = getReadableDatabase();
+
+        int i = 0;
+
+        // 유저네임 비교하여 title, content 값 가져오기
+        Cursor cursor = db.rawQuery("SELECT * FROM BOARD WHERE user='" + user +"'",null);
+        while(cursor.moveToNext()) {
+            number[i] = cursor.getString(0);
+            date[i] = cursor.getString(1);
+            title[i] = cursor.getString(3);
+            content[i] = cursor.getString(4);
+            i++;
+        }
+        db.close();
+        return i;
     }
 
     // ModifySignActivity

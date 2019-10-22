@@ -11,8 +11,10 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -21,9 +23,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ImageView youtubeButton;
     ImageView newsButton;
 
-    // 테이블에 있는 모든 데이터 출력하기 위한 뷰
-    // 좀 게시글의 형태로 수정 필요
-    TextView result;
+    // 게시글 출력을 위한 것들
+    private ListView listview1;
+    private ListViewAdapter adapter2;
+
+    private String[] Number = new String[100];
+    private String[] Date = new String[100];
+    private String[] Username = new String[100];
+    private String[] Title = new String[100];
+    private String[] Content = new String[100];
 
     // 유저
     public String username;
@@ -49,13 +57,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         youtubeButton = (ImageView) findViewById(R.id.youtubeButton);
         newsButton = (ImageView) findViewById(R.id.newsButton);
-        result = (TextView) findViewById(R.id.result);
         tUsername = (TextView) header.findViewById(R.id.textUsername) ;
         tEmail = (TextView) header.findViewById(R.id.textEmailaddress);
 
+        // 변수 초기화
+        adapter2 = new ListViewAdapter();
+        listview1 = (ListView) findViewById(R.id.List_view1);
+
+        // 어댑터 할당
+        listview1.setAdapter(adapter2);
+
         // 내장 디비 연결
         DBHelper dbHelper = new DBHelper(getApplicationContext(), "A.db", null, 1);
-        result.setText(dbHelper.GetResultBoard());
+        int a = dbHelper.Board(Number, Username, Date, Title, Content);
+
+        // 어댑터를 통한 값 전달
+        for(int i=0; i < a; i++) {
+            adapter2.addVO(Number[i], Username[i], Date[i], Title[i],Content[i]);
+        }
 
         // LoginActivity로부터 유저이름 받아오기
         Intent intent = getIntent();
@@ -110,7 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent2);
         } else if (id == R.id.nav_Board) {
             // 게시글 관리 화면으로 이동
-            Intent intent4 = new Intent(this, BoardActivity.class);
+            Intent intent4 = new Intent(this, BoardManageActivity.class);
             intent4.putExtra("username",username);
             startActivity(intent4);
         } else if (id == R.id.nav_Setting) {
@@ -121,6 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_FAQ) {
             // 고객센터 화면으로 이동
             Intent intent6 = new Intent(this, FAQActivity.class);
+            intent6.putExtra("username",username);
             startActivity(intent6);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
