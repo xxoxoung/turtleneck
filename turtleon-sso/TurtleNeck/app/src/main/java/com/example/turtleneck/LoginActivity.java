@@ -6,30 +6,33 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 // 로그인 화면
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button LoginBtn;
-    private Button GoSignBtn;
     private EditText eName;
     private EditText ePW;
+
+    private ImageView loginImage;
+    private ImageView signinImage;
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // 버튼에 이벤트 리스너 연결
-        LoginBtn = findViewById(R.id.LoginBtn);
-        GoSignBtn= findViewById(R.id.GoSignBtn);
-
-        LoginBtn.setOnClickListener(this);
-        GoSignBtn.setOnClickListener(this);
-
         // 로그인 정보 가져오기
         eName = (EditText) findViewById(R.id.Name);
         ePW = (EditText) findViewById(R.id.PW);
+
+        // 이미지뷰 정보 가져오기
+        loginImage = (ImageView) findViewById(R.id.LoginBtn);
+        signinImage = (ImageView) findViewById(R.id.GoSignBtn);
+
+        loginImage.setOnClickListener(this);
+        signinImage.setOnClickListener(this);
     }
 
     // 클릭시 이벤트 설정

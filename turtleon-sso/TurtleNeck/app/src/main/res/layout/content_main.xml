@@ -10,7 +10,6 @@
     tools:showIn="@layout/app_bar_main"
     android:orientation="vertical"
     android:padding="12dp">
-
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"

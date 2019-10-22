@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SignActivity">
     <TableLayout
         android:layout_width="wrap_content"
@@ -21,6 +22,7 @@
                 android:ems="13"
                 android:hint="이름" />
         </TableRow>
+
         <TableRow>
             <EditText
                 android:id="@+id/Email"
@@ -34,6 +36,7 @@
                 android:ems="13"
                 android:hint="이메일 (exam@mail.com)" />
         </TableRow>
+
         <TableRow>
             <EditText
                 android:id="@+id/PW1"
@@ -48,6 +51,7 @@
                 android:ems="13"
                 android:hint="비밀번호 (8자 이상 영어, 숫자)" />
         </TableRow>
+
         <TableRow>
             <EditText
                 android:id="@+id/PW2"
@@ -62,14 +66,22 @@
                 android:ems="13"
                 android:hint="비밀번호 확인"/>
         </TableRow>
-        <TableRow>
-            <Button
-                android:id="@+id/SignBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="회원가입"
-                />
+
+        <TableRow
+            android:layout_marginTop="20dp">
+            <android.support.constraint.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/SignBtn"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/signin"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </android.support.constraint.ConstraintLayout>
         </TableRow>
     </TableLayout>
 </RelativeLayout>

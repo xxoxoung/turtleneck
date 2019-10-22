@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,19 +14,19 @@ import java.util.regex.Pattern;
 // 회원가입 화면
 public class SignActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button SignBtn;
     private EditText ePW1;
     private EditText ePW2;
     private EditText eName;
     private EditText eEmail;
 
+    private ImageView loginImage;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign);
 
-        // 버튼에 이벤트 리스너 연결
-        SignBtn = findViewById(R.id.SignBtn);
-        SignBtn.setOnClickListener(this);
+        loginImage = (ImageView) findViewById(R.id.SignBtn);
+        loginImage.setOnClickListener(this);
     }
 
     // 이메일 형식 확인

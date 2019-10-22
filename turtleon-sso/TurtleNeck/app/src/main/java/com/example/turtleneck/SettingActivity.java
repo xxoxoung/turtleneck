@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.Button;
 
 public class SettingActivity extends AppCompatActivity {
-    Button mdButton;
-    Button osButton;
-
     public String username;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,9 +17,6 @@ public class SettingActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
-
-        mdButton = (Button) findViewById(R.id.ModiSignBtn);
-        osButton = (Button) findViewById(R.id.OutBtn);
     }
 
     // ModifySignActivity 로 이동
