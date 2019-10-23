@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // 내장 디비 연결
         DBHelper dbHelper = new DBHelper(getApplicationContext(), "A.db", null, 1);
-        int a = dbHelper.Board(Number, Username, Date, Title, Content);
+        int a = dbHelper.LoadBoard(Number, Username, Date, Title, Content);
 
         // 어댑터를 통한 값 전달
         for(int i=0; i < a; i++) {

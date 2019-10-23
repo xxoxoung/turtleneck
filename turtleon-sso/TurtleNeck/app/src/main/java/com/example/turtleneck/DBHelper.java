@@ -116,7 +116,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // MainActivity
     // 전체 게시글 목록 보기
-    public int Board(String[] number, String[] date, String[] user, String[] title, String[] content) {
+    public int LoadBoard(String[] number, String[] date, String[] user, String[] title, String[] content) {
         // 읽기 가능하게 DB 열기
         SQLiteDatabase db = getReadableDatabase();
 
@@ -172,6 +172,8 @@ public class DBHelper extends SQLiteOpenHelper {
         // 읽기 가능하게 DB 열기
         SQLiteDatabase db = getReadableDatabase();
 
+        // 글 갯수 받아올 변수
+        // listview의 adapter에서 사용할 예정
         int i = 0;
 
         // 유저네임 비교하여 title, content 값 가져오기
@@ -185,6 +187,18 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         db.close();
         return i;
+    }
+
+    // BoardManageActivity
+    // 게시글 삭제하기
+    public void DeleteBoard(String Number) {
+        // 읽고 쓰기가 가능하게 DB 열기
+        SQLiteDatabase db = getWritableDatabase();
+
+        // 해당 하는 번호의 게시글 삭제
+        db.execSQL("DELETE FROM BOARD WHERE _id_b='" + Number + "';");
+
+        db.close();
     }
 
     // ModifySignActivity
@@ -206,34 +220,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 }
-
-//    public int SignoutUser(String u, String p, String e) {
-//        // 디비를 읽고 쓰기가 가능하게 열기
-//        SQLiteDatabase db = getWritableDatabase();
-//
-//        String username = "";
-//        String password = "";
-//        String email = "";
-//
-//        // 입력한 회원 정보 확인
-//        Cursor cursor = db.rawQuery("SELECT * FROM USER", null);
-//        while (cursor.moveToNext()) {
-//            username = cursor.getString(1);
-//            password = cursor.getString(2);
-//            email = cursor.getString(3);
-//
-//            // 회원이 맞으면
-//            if (password.equals(p)&&username.equals(u)&&email.equals(e)) {
-//                // 테이블에서 해당 행 삭제 진행 >> 탈퇴하기
-//                db.execSQL("DELETE FROM USER WHERE username='"+u+"';");
-//                db.close();
-//                return 0;
-//            }
-//        }
-//        // 테이블에 회원 정보가 없는 경우
-//        db.close();
-//        return 1;
-//    }
 
 //    public void update(String item, int price) {
 //        SQLiteDatabase db = getWritableDatabase();

@@ -68,4 +68,17 @@
                 android:padding="3dp"/>
         </LinearLayout>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+        <ImageView
+            android:src="@drawable/delete"
+            android:id="@+id/deleteBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:layout_marginRight="6dp" />
+    </LinearLayout>
 </LinearLayout>

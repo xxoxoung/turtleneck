@@ -1,10 +1,15 @@
 package com.example.turtleneck;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,14 +37,16 @@ public class BoardListViewAdapter extends BaseAdapter {
 
         if(convertView == null) {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.custom_listview, parent, false);
+            convertView = inflater.inflate(R.layout.custom_listview1, parent, false);
         }
 
+        // 내용을 띄울 텍스트뷰
         TextView Number = (TextView) convertView.findViewById(R.id.number);
         TextView Date = (TextView) convertView.findViewById(R.id.date);
         TextView User = (TextView) convertView.findViewById(R.id.user);
         TextView TItle = (TextView) convertView.findViewById(R.id.title);
         TextView Content = (TextView) convertView.findViewById(R.id.content);
+        ImageView DeleteImg = (ImageView) convertView.findViewById(R.id.deleteBtn);
 
         final ListVO listViewItem = listVO.get(position);
 
@@ -49,13 +56,6 @@ public class BoardListViewAdapter extends BaseAdapter {
         User.setText(listViewItem.getUser());
         TItle.setText(listViewItem.getTitle());
         Content.setText(listViewItem.getContent());
-
-        // 클릭 이벤트 >> 삭제 할 것인지 물어보고 삭제하기
-        convertView.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Toast.makeText(context,(pos+1)+"번째 리스트 클릭",Toast.LENGTH_SHORT).show();
-            }
-        });
 
         return convertView;
     }

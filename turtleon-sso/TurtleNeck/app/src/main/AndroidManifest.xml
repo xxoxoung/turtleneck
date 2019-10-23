@@ -49,7 +49,8 @@
         <activity android:name=".ConfirmActivity"></activity>
         <activity android:name=".ModifySignActivity"></activity>
         <activity android:name=".BoardActivity"></activity>
-        <activity android:name=".BoardManageActivity"></activity>
+        <activity android:name=".BoardManageActivity"
+            android:theme="@style/AppTheme"></activity>
         <activity android:name=".SettingActivity"></activity>
         <activity android:name=".FAQActivity"></activity>
 
