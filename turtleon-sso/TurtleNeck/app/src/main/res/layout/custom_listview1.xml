@@ -58,14 +58,6 @@
                 android:text="날짜"
                 android:textSize="13dp"
                 android:padding="3dp"/>
-            <TextView
-                android:id="@+id/user"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="작성자"
-                android:textSize="13dp"
-                android:padding="3dp"/>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout

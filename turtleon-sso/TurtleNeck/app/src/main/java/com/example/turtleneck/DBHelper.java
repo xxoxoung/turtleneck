@@ -84,16 +84,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return 1;
     }
 
-//    // LoginActivity
-//    // 세션 유지하기
-//    public void MakeSession(String u) {
-//        SQLiteDatabase db = getWritableDatabase();
-//
-//        // 세션 테이블에 유저이름 저장
-//        db.execSQL("INSERT INTO SESSION VALUES(null,'" + u + "');");
-//        db.close();
-//    }
-
     // MainActivity
     // 게시판 글 불러오기 > 게시판 기능
     public String GetResultBoard() {

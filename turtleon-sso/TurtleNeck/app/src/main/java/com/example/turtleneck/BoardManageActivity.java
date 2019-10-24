@@ -84,7 +84,7 @@ public class BoardManageActivity extends AppCompatActivity {
 
         // 어댑터를 통한 값 전달
         for(int i = 0; i < a; i++) {
-            adapter.addVO(Number[i], username, Date[i], Title[i],Content[i]);
+            adapter.BoardManageaddVO(Number[i], Date[i], Title[i],Content[i]);
         }
     }
 

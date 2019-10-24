@@ -15,12 +15,21 @@ public class HelpPhotoActivity extends AppCompatActivity implements View.OnClick
     Button NextBtn;
     Button ShutBtn;
 
+    public String tall;
+    public String gender;
+    public String username;
+
     int next = 1;           // 버튼을 위한 변수
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_helpphoto);
+
+        Intent intent = getIntent();
+        tall = intent.getStringExtra("tall");
+        gender = intent.getStringExtra("gender");
+        username = intent.getStringExtra("username");
 
         example = (ImageView) findViewById(R.id.example);       // 예시 이미지
         PrevBtn = (Button) findViewById(R.id.PrevBtn);       // 이전 버튼
@@ -82,6 +91,9 @@ public class HelpPhotoActivity extends AppCompatActivity implements View.OnClick
             // 닫기 버튼 눌렀을 때
             case R.id.ShutBtn: {
                 Intent intent1 = new Intent(this, GetPhotoActivity.class);
+                intent1.putExtra("tall",tall);
+                intent1.putExtra("gender",gender);
+                intent1.putExtra("username",username);
                 startActivity(intent1);
                 finish();
                 break;

@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface DjangoApi {
 
-    String DJANGO_SITE = "http://1996a61e.ngrok.io/";
+    String DJANGO_SITE = "http://de7edc55.ngrok.io/";
     //내 authtoken 주소/ngrok 끄면 다시 켜서 주소 바꿔줘야함..
 
     // SignActivity
@@ -51,10 +51,10 @@ public interface DjangoApi {
 //    @GET("rest-auth/user")
 //    Call<List<ResponseBody>> get_login(
 //            @Query("username") String username);
-
-    @GET("rest-auth/user/?format=json")
-    Call<ResponseBody> get_login(
-            @Query("username") String username);
+//
+//    @GET("rest-auth/user/?format=json")
+//    Call<ResponseBody> get_login(
+//            @Query("username") String username);
 
     // LoginActivity
     // 로그인 여부 확인
@@ -79,8 +79,7 @@ public interface DjangoApi {
     // 진단값 가져오기
     // 서버 연결 후 수정하기
     @GET("where/the/Diag/value/exist/")
-    Call<ResponseBody> GetDiagValue(
-            @Path("username") String username);
+    Call<ResponseBody> GetDiagValue( );
 
     // ModifySignActivity
     // 회원가입 정보 수정

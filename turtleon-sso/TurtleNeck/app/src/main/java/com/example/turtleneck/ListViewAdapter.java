@@ -6,17 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class ListViewAdapter extends BaseAdapter {
 
     public ArrayList<ListVO> listVO = new ArrayList<ListVO>();
 
-    public ListViewAdapter() {
-
-    }
+    public ListViewAdapter() { }
 
     @Override
     public int getCount() {
@@ -63,8 +59,10 @@ public class ListViewAdapter extends BaseAdapter {
         return listVO.get(position);
     }
 
+    // MainActivity
     // 데이터 값 넣어주기
-    public void addVO(String number, String date, String user, String title, String content) {
+    // 게시글 번호, 날짜, 작성자(user), 제목, 내용
+    public void MainaddVO(String number, String date, String user, String title, String content) {
         ListVO item = new ListVO();
 
         item.setNumber(number);

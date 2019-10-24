@@ -48,7 +48,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     double cnt = 0;
 
     // 서버에서 알고리즘을 돌리기 위한 변수
-    String confirm = "1000";
+    String confirm = "-1";
 
     public double height;                             // 사진 세로 크기
     public double width;                              // 사진 가로 크기
@@ -115,7 +115,9 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
 
                 // 이미지 서버로 전송 후 로딩 화면으로 넘기기
                 // 이미지 전송 >> 로딩 화면 >> 서버 알고리즘 실행 후 >> 그래프 화면
-                Intent intent1 = new Intent(this, DelayActivity.class);
+                //Intent intent1 = new Intent(this, DelayActivity.class);
+                Intent intent1 = new Intent(this, GraphActivity.class);
+                intent1.putExtra("username",username);
                 startActivity(intent1);
                 finish();
                 break;
@@ -124,6 +126,9 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
             // 도움말 페이지 열기
             case R.id.HelpImg: {
                 Intent intent2 = new Intent(this, HelpPhotoActivity.class);
+                intent2.putExtra("tall",tall);
+                intent2.putExtra("gender",gender);
+                intent2.putExtra("username",username);
                 startActivity(intent2);
                 break;
             }

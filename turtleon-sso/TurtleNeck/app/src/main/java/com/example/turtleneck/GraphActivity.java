@@ -20,6 +20,8 @@ import org.achartengine.renderer.XYSeriesRenderer;
 // 진단 결과 그래프로 보여주는 화면
 public class GraphActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public String username;
+
     // 막대그래프 그리기
     private GraphicalView mChartView;
 
@@ -29,7 +31,7 @@ public class GraphActivity extends AppCompatActivity implements View.OnClickList
             "진단 \n기준값"
     };
 
-    // 진단 기준값에서 뵤여주고 싶은 레이블,,,
+    // 진단 기준값에서 보여주고 싶은 레이블,,,
     private String[] standard = new String[]{
             "",
             "Bad",
@@ -42,12 +44,16 @@ public class GraphActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_graph);
         findViewById(R.id.GotoMainBtn).setOnClickListener(this);
 
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+
         drawChart();
     }
 
     // 메인으로 버튼 클릭 이벤트
     public void onClick(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("username",username);
         startActivity(intent);
         finish();
     }

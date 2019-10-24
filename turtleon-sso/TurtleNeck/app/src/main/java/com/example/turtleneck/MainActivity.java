@@ -11,7 +11,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -73,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         // 어댑터를 통한 값 전달
         for(int i=0; i < a; i++) {
-            adapter2.addVO(Number[i], Username[i], Date[i], Title[i],Content[i]);
+            adapter2.MainaddVO(Number[i], Username[i], Date[i], Title[i],Content[i]);
         }
 
         // LoginActivity로부터 유저이름 받아오기
