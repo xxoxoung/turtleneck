@@ -156,6 +156,7 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
                         "com.example.turtleneck.fileprovider",
                         photoFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                intent.putExtra("username",username);
                 startActivityForResult(intent, REQUEST_TAKE_PHOTO);
             }
         }
