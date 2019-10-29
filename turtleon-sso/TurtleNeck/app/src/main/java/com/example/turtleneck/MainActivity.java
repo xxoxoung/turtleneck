@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent1);
         } else if (id == R.id.nav_ConfirmDia) {
             // 진단 확인 화면으로 이동
-            Intent intent2 = new Intent(this, ConfirmActivity.class);
+            Intent intent2 = new Intent(this, DelayActivity.class);
             intent2.putExtra("username",username);
             startActivity(intent2);
         } else if (id == R.id.nav_Board) {

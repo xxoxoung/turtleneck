@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface DjangoApi {
 
-    String DJANGO_SITE = "http://de7edc55.ngrok.io/";
+    String DJANGO_SITE = "http://848a5cf9.ngrok.io/";
     //내 authtoken 주소/ngrok 끄면 다시 켜서 주소 바꿔줘야함..
 
     // SignActivity
@@ -78,8 +78,8 @@ public interface DjangoApi {
     // GraphActivity
     // 진단값 가져오기
     // 서버 연결 후 수정하기
-    @GET("where/the/Diag/value/exist/")
-    Call<ResponseBody> GetDiagValue( );
+    @GET("image/diag/")
+    Call<RequestBody> GetDiagValue( );
 
     // ModifySignActivity
     // 회원가입 정보 수정

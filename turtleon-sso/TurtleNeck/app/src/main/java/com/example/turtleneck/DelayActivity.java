@@ -2,15 +2,13 @@ package com.example.turtleneck;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.widget.Toast;
 
-import com.google.gson.JsonObject;
+import java.util.Timer;
+import java.util.TimerTask;
 
-import java.io.IOException;
-
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,64 +21,81 @@ public class DelayActivity extends AppCompatActivity {
 
     public String username;
 
+    public float confirm = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        float confirm = -1;
 
         // LoginActivity로부터 유저이름 받아오기
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
 
-        while (confirm == -1) {
-            // 10초에 한번씩 실행
-            Handler handler = new Handler() {
-                public void handleMessage(Message msg) {
-                    super.handleMessage(msg);
-                }
-            };
-            handler.sendEmptyMessageDelayed(0, 10000);
+        final DBHelper dbHelper = new DBHelper(getApplicationContext(), "A.db", null, 1);
+        //dbHelper.SetDiag(username,confirm);
 
-            //confirm = GetDiag();
-        }
-
-        Intent intent1 = new Intent(DelayActivity.this, GraphActivity.class);
-        intent1.putExtra("username",username);
-        intent1.putExtra("confirm",confirm);
-        startActivity(intent1);
-        finish();
-    }
-
-    public void GetDiag() {
         // 네트워크 빌드
+//        Gson gson = new GsonBuilder()
+//                .excludeFieldsWithoutExposeAnnotation()
+//                .setLenient()
+//                .create();
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(DjangoApi.DJANGO_SITE)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        DjangoApi postApi = retrofit.create(DjangoApi.class);
-        Call<ResponseBody> getcall = postApi.GetDiagValue( );
+        final DjangoApi postApi = retrofit.create(DjangoApi.class);
 
-        // 진단값 확인을 위한 함수 호출 실행
-        // -1 이면 함수 재실행
-        // -1 아니면 진단값 저장된 것 이므로 화면 넘기기
-        getcall.enqueue(new Callback<ResponseBody>() {
+        // 20초에 한번씩 실행
+        Timer timer = new Timer();
+
+        TimerTask TT = new TimerTask() {
+            // 반복 실행할 구문
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.isSuccessful()) {
+            public void run() {
+                // comfirm 값을 가져와서
+                // -1이면 반복 실행
+                // 다른 값이면 화면 넘어가기
+                Call<RequestBody> getcall = postApi.GetDiagValue();
+                getcall.enqueue(new Callback<RequestBody>() {
+                    @Override
+                    public void onResponse(Call<RequestBody> call, Response<RequestBody> response) {
+                        Toast.makeText(getApplicationContext(), "GET 함수 요청",Toast.LENGTH_SHORT).show();
 
-                    //return Diag;
-                }
+                        if (response.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "응답 성공",Toast.LENGTH_SHORT).show();
+                            RequestBody body = response.body();
+                            if (body != null) {
+                                Toast.makeText(getApplicationContext(), "진단값 : " + body.toString(),Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(), "진단값 : " + body.getDiag(),Toast.LENGTH_SHORT).show();
+                                // 가져온 진단값 내부디비에 임시 저장
+                                //dbHelper.InsertDiag(username,);
+                            }
+                        }
+                    }
 
-
+                    @Override
+                    public void onFailure(Call<RequestBody> call, Throwable t) {
+                        Toast.makeText(getApplicationContext(), "응답 실패ㅐㅐㅐㅐㅐㅐ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "" + t.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
+        };
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+        // TimerTask, 처음 대기시간, 반복시간
+        timer.schedule(TT, 10, 20000);
 
-            }
-        });
+        if(confirm != -1) {
+            timer.cancel();
+            Intent intent1 = new Intent(DelayActivity.this, GraphActivity.class);
+            intent1.putExtra("username", username);
+            intent1.putExtra("confirm", confirm);
+            startActivity(intent1);
+            finish();
+        }
     }
 }

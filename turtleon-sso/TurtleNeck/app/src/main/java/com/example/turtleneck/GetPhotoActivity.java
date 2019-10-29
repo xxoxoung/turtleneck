@@ -22,8 +22,6 @@ import java.lang.String;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -113,10 +111,8 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
                 //서버로 보내는 함수 호출
                 uploadImage();
 
-                // 이미지 서버로 전송 후 로딩 화면으로 넘기기
-                // 이미지 전송 >> 로딩 화면 >> 서버 알고리즘 실행 후 >> 그래프 화면
-                //Intent intent1 = new Intent(this, DelayActivity.class);
-                Intent intent1 = new Intent(this, GraphActivity.class);
+                // 이미지 전송 >> 로딩 화면 >> 서버 알고리즘 실행 후 >> 그래프 화면 (진단확인 화면)
+                Intent intent1 = new Intent(this, DelayActivity.class);
                 intent1.putExtra("username",username);
                 startActivity(intent1);
                 finish();
