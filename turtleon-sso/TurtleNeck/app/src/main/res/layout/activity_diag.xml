@@ -14,7 +14,7 @@
         android:gravity="center"
         android:textSize="24dp"
         android:textStyle="bold"
-        android:text="진단을 위한 정보를 입력해주세요!"/>
+        android:text="진단을 위한 정보를\n 입력해주세요!"/>
 
     // 진단 전 받는 사용자 정보
     <TableLayout
@@ -42,12 +42,13 @@
                 android:layout_height="wrap_content"></Spinner>
         </TableRow>
 
-        <TableRow>
-            <Button
+        <TableRow
+            android:layout_marginTop="50dp">
+            <ImageView
                 android:id="@+id/StDgBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="진단시작" />
+                android:src="@drawable/diagnosis"
+                android:layout_width="50dp"
+                android:layout_height="50dp"/>
         </TableRow>
     </TableLayout>
 </RelativeLayout>

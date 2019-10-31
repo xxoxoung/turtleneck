@@ -31,20 +31,20 @@ public class GraphActivity extends AppCompatActivity implements View.OnClickList
         DiagLevel = (TextView) findViewById(R.id.DiagLevel);
         DiagImg = (ImageView) findViewById(R.id.DiagImg);
 
-        DiagConfirm.setText("당신의 진단값 : " + diag.toString());
+        DiagConfirm.setText("당신의 진단값은 \n" + diag.toString() +" 입니다.");
 
         // Good 1.1106 <= 진단값
         // Fair 0.9325 <= 진단값 < 1.1106
         // Bad 진단값 < 0.9325
         if(1.1106 <= diag) {
             DiagImg.setImageResource(R.drawable.diaggood);
-            DiagLevel.setText("당신의 거북목 상태는 Good 입니다.");
+            DiagLevel.setText("당신의 거북목 상태는\n Good 입니다.");
         } else if (0.9325 <= diag && diag < 1.1106) {
             DiagImg.setImageResource(R.drawable.diagfair);
-            DiagLevel.setText("당신의 거북목 상태는 Fair 입니다.");
+            DiagLevel.setText("당신의 거북목 상태는\n Fair 입니다.");
         } else {
             DiagImg.setImageResource(R.drawable.diagbad);
-            DiagLevel.setText("당신의 거북목 상태는 Bad 입니다.");
+            DiagLevel.setText("당신의 거북목 상태는\n Bad 입니다.");
         }
     }
 

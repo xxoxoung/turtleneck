@@ -3,7 +3,6 @@ package com.example.turtleneck;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,15 +11,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 // 진단 정보 입력 화면
 public class DiagActivity extends AppCompatActivity implements View.OnClickListener {
@@ -81,7 +71,6 @@ public class DiagActivity extends AppCompatActivity implements View.OnClickListe
 
         if(!tall.isEmpty()) {
             Intent intent = new Intent(this, GetPhotoActivity.class);
-
             // tall,gender정보를 GetPhotoActivity로 전송
             intent.putExtra("tall",tall);
             intent.putExtra("gender",gender);

@@ -48,7 +48,7 @@ public class DelayActivity extends AppCompatActivity {
             public void run() {
                 // comfirm 값을 가져와서
                 // -1이면 반복 실행
-                // 다른 값이면 화면 넘어가기
+                // 다른 값이면 진단이 된 것이므로 화면 넘어가기
                 Call<String> getcall = postApi.GetDiagValue();
                 getcall.enqueue(new Callback<String>() {
                     @Override
@@ -56,7 +56,6 @@ public class DelayActivity extends AppCompatActivity {
                         if (response.isSuccessful()) {
                             String body = response.body();
                             float diagconfirm = Float.parseFloat(body);
-                            Toast.makeText(getApplicationContext(), "가져온 값 : " +diagconfirm, Toast.LENGTH_LONG).show();
                             if (body != null) {
                                 if( diagconfirm == confirm) {
                                     // 값이 변한게 아니므로 계속 되도록
@@ -76,13 +75,12 @@ public class DelayActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-                        Toast.makeText(getApplicationContext(),"실패!!!!!!" +t.toString(), Toast.LENGTH_LONG).show();
                     }
                 });
             }
         };
 
         // TimerTask, 처음 대기시간, 반복시간
-        timer.schedule(TT, 50000, 20000);
+        timer.schedule(TT, 120000, 10000);
     }
 }
