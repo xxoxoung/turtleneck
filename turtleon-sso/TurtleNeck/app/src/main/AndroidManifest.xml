@@ -39,7 +39,6 @@
         </activity>
 
         <activity android:name=".YoutubeActivity"></activity>
-        <activity android:name=".NewsActivity"></activity>
 
         <activity android:name=".DiagActivity"></activity>
         <activity android:name=".GetPhotoActivity"></activity>
@@ -47,7 +46,6 @@
         <activity android:name=".DelayActivity"></activity>
         <activity android:name=".GraphActivity"></activity>
 
-        <activity android:name=".ConfirmActivity"></activity>
         <activity android:name=".ModifySignActivity"></activity>
         <activity android:name=".BoardActivity"></activity>
         <activity android:name=".BoardManageActivity"

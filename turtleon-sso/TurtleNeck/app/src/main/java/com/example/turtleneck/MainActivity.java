@@ -121,11 +121,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             Intent intent1 = new Intent(this, DiagActivity.class);
             intent1.putExtra("username",username);
             startActivity(intent1);
-        } else if (id == R.id.nav_ConfirmDia) {
-            // 진단 확인 화면으로 이동
-            Intent intent2 = new Intent(this, DelayActivity.class);
-            intent2.putExtra("username",username);
-            startActivity(intent2);
         } else if (id == R.id.nav_Board) {
             // 게시글 관리 화면으로 이동
             Intent intent4 = new Intent(this, BoardManageActivity.class);
@@ -170,9 +165,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // 랜덤으로 뉴스 기사 페이지로 이동해서 보여주기
         Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse(newsString[i]));
         startActivity(intent2);
-
-//        Intent intent2 = new Intent(this, NewsActivity.class);
-//        startActivity(intent2);
     }
 
     // BoardAcitivity 로 이동

@@ -1,60 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_gravity="center"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".GraphActivity">
+    tools:context=".GraphActivity"
+    android:orientation="horizontal"
+    android:padding="5dp">
 
-    <!--// 임시 문구-->
-    <!--// 나중에 디비에서 결과값 보여주기-->
-    <!--<TextView-->
-        <!--android:text="당신의 진단 결과는?"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_marginTop="40dp"-->
-        <!--android:textSize="24dp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:id="@+id/ggg"/>-->
-
-    <!--//진단 그래프로 교체하기!!!-->
-    <!--<ImageView-->
-        <!--android:id="@+id/GraphLogo"-->
-        <!--android:layout_width="200dp"-->
-        <!--android:layout_height="200dp"-->
-        <!--android:layout_marginTop="50dp"-->
-        <!--android:layout_marginBottom="50dp"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:src="@drawable/helpicon"-->
-        <!--android:layout_below="@id/ggg"/>-->
-    <LinearLayout
-        android:id="@+id/ggg"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        tools:ignore="MissingConstraints">
-
-        <LinearLayout
-            android:id="@+id/chart_bar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"></LinearLayout>
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/GotoMainBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/DiagImg"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:layout_centerHorizontal="true"
-        android:layout_weight="1"
-        android:text="메인으로 돌아가기"
+        android:scaleType="centerInside"
+        android:src="@drawable/diaggood"
+        android:padding="5dp"
+        android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.828" />
+        app:layout_constraintVertical_bias="0.299" />
+
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+        tools:ignore="MissingConstraints"
+        android:layout_centerInParent="true">
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+            <TableRow>
+                <TextView
+                    android:id="@+id/DiagLevel"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:id="@+id/DiagConfirm"
+                    android:textStyle="bold"
+                    android:textSize="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    />
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/GotoMainimg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="180dp"
+        android:layout_marginRight="180dp"
+        android:layout_marginBottom="80dp"
+        android:layout_weight="1"
+        android:src="@drawable/main"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 </android.support.constraint.ConstraintLayout>

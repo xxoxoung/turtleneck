@@ -32,19 +32,22 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="50dp">
-                <Button
+                <ImageView
                     android:id="@+id/GoCam"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="카메라로"
-                    android:layout_alignParentBottom="true" />
-                <Button
+                    android:src="@drawable/camera"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentBottom="true"
+                    android:padding="5dp"
+                    android:layout_marginRight="25dp"/>
+                <ImageView
                     android:id="@+id/GoServer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="진단하기"
+                    android:src="@drawable/diagnosis"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_alignParentBottom="true"
                     android:layout_below="@+id/GoCam"
-                    />
+                    android:padding="5dp"
+                    android:layout_marginLeft="25dp"/>
         </LinearLayout>
 </RelativeLayout>

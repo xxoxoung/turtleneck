@@ -16,10 +16,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import java.lang.String;
 
+import java.lang.String;
 import java.io.File;
 import java.io.IOException;
 
@@ -27,6 +26,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -38,8 +38,8 @@ public class GetPhotoActivity extends AppCompatActivity implements View.OnClickL
     final String TAG = getClass().getSimpleName();
     ImageView imageView;
     ImageView HelpImg;
-    Button GoCam;
-    Button GoServer;
+    ImageView GoCam;
+    ImageView GoServer;
     final static int TAKE_PHOTO = 1;
 
     // 사진 이름을 위한 변수

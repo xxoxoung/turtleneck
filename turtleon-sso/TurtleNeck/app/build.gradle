@@ -28,11 +28,16 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //서버에 필요한 부분
-    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
-    implementation 'com.squareup.okhttp:okhttp:2.4.0'
-    implementation 'com.google.code.gson:gson:1.7.2'
-    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
+//    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+//    implementation 'com.squareup.okhttp:okhttp:2.4.0'
+//    implementation 'com.google.code.gson:gson:1.7.2'
+//    implementation 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+//    implementation 'com.squareup.okhttp3:logging-interceptor:3.3.1'
     implementation files('lib/achartengine-1.2.0.jar')
     implementation files('lib/YouTubeAndroidPlayerApi.jar')
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.4.2'
 }

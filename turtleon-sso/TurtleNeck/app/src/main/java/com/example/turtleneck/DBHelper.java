@@ -32,11 +32,6 @@ public class DBHelper extends SQLiteOpenHelper {
         // 게시글 작성 날짜 date 게시글 작성자 user
         // 게시글 제목 title     게시글 내용 content
         db.execSQL("CREATE TABLE BOARD (_id_b INTEGER PRIMARY KEY AUTOINCREMENT, date TEXT, user TEXT, title TEXT, content TEXT);");
-
-        // 진단값 임시저장 테이블 DIAG
-        // 기본키 : 유저네임
-        // 진단값만 저장
-        db.execSQL("CREATE TABLE DIAG (username STRING PRIMARY KEY, confirm FLOAT);");
     }
 
     // DB 업그레이드를 위해 버전이 변경될 때 호출되는 함수
@@ -149,18 +144,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return result;
     }
-
-//    // DelayActivity
-//    // 통신을 통해 가져온 진단값 비교할 대상 설정
-//    // 유저네임, -1 저장
-//    public void SetDiag (String username, float confirm) {
-//        // 읽고 쓰기가 가능하게 DB 열기
-//        SQLiteDatabase db = getWritableDatabase();
-//
-//        // DB에 입력한 값으로 행 추가
-//        db.execSQL("INSERT");
-//
-//    }
 
     // BoardActivity
     // 게시판 글쓰기
