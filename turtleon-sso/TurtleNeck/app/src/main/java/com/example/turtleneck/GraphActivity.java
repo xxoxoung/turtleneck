@@ -16,6 +16,7 @@ public class GraphActivity extends AppCompatActivity implements View.OnClickList
     TextView DiagConfirm;
     TextView DiagLevel;
     ImageView DiagImg;
+    TextView Standard;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,8 +31,10 @@ public class GraphActivity extends AppCompatActivity implements View.OnClickList
         DiagConfirm = (TextView) findViewById(R.id.DiagConfirm);
         DiagLevel = (TextView) findViewById(R.id.DiagLevel);
         DiagImg = (ImageView) findViewById(R.id.DiagImg);
+        Standard = (TextView) findViewById(R.id.Standard);
 
         DiagConfirm.setText("당신의 진단값은 \n" + diag.toString() +" 입니다.");
+        Standard.setText("\n 진단 기준 \nGOOD : 1.1106 <= 진단값\nFair : 0.9325 <= 진단값 <1.1106\nBad : 진단값 < 0.9325");
 
         // Good 1.1106 <= 진단값
         // Fair 0.9325 <= 진단값 < 1.1106

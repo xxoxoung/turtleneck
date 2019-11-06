@@ -86,7 +86,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:text="\n 진단 기준 \nGOOD : 1.1106 <= 진단값\nFair : 0.9325 <= 진단값 <1.1106\nBad : 진단값 < 0.9325"
+                    android:text="\n 진단기준"
                     android:textSize="15dp" />
             </TableRow>
         </TableLayout>
